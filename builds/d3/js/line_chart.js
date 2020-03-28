@@ -4,7 +4,7 @@ const svg = d3
     .append("svg")
     .attr("height", 500)
     .attr("width", 800);
-const margin = { top: 0, bottom: 40, left: 100, right: 100 };
+const margin = { top: 60, bottom: 70, left: 100, right: 100 };
 const chart = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`).attr("id","canvas");
 const width = +svg.attr("width") - margin.left - margin.right;
 const height = +svg.attr("height") - margin.top - margin.bottom;
@@ -58,14 +58,13 @@ d3.csv("dataset/understat.com.csv", function(d) {
     [xScale,yScale] = axisScales(height,width,max_victories);
     console.log(yScale(0));
 
+    chart_title(svg,"Number of victories across seasons",(0.5*width+margin.left),margin.top/3);
     generate_axis();
 
     generateInput(allTeams,"team-dropdown",'addTeam','(this)');
-    chart.select("#x-axis").select("path").attr('stroke','#343636').attr("stroke-width", 2);
-    chart.select("#y-axis").select("path").attr('stroke','#343636').attr("stroke-width", 2);
 
     axisLabel(svg,margin.left/2 , height/2, "Victories","rotate(-90)");
-    axisLabel(svg,width/2 + margin.left, height + margin.top + 40, "Season");
+    axisLabel(svg,width/2 + margin.left, height + margin.top + 45, "Season");
 
     apply_axis_style();
 
@@ -150,7 +149,7 @@ function addLine(data, color, margin, xScale, yScale)
 function generate_line(lines_canvas,data,color,d3_line)
 {
    return lines_canvas.append("path")
-        .attr("transform", "translate(" + margin.left + ",0)")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
         .datum(data)
         .attr("fill", "none")
         .attr("stroke", color )

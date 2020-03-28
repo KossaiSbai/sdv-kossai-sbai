@@ -40,7 +40,7 @@ d3.csv("dataset/understat.com.csv", function(d) {
     csv_data = data;
     reset_button();
     all_leagues = extract_all_leagues(data);
-    generateInput();
+    generateInput(all_leagues,"league-dropdown","load_table","(this)");
     table_data = extract_table_data(select_league_data("La_liga",data));
     current_displayed_data = table_data;
     generate_table(table_data,columns,properties);
@@ -189,20 +189,6 @@ function filter_out_data_by_property(property, value, data, filter_out)
     return data.filter(e => filter_out(e,property,value))
 }
 
-
-function generateInput()
-{
-    d3.select(".dropdown-menu")
-        .selectAll("a")
-        .data(all_leagues)
-        .enter()
-        .append("a")
-        .html(function (d) {
-            return d;
-        })
-        .attr("onclick","load_table(this)")
-        .attr("class","dropdown-item");
-}
 
 function load_table(a)
 {

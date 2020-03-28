@@ -231,7 +231,7 @@
         },
 
         // For internal use only.
-        // Behaves like an Array's method, not like a jQuery method.
+        // Behaves like an Array'plot_scatterplot_chart method, not like a jQuery method.
         push: push,
         sort: arr.sort,
         splice: arr.splice
@@ -567,7 +567,7 @@
                 push_native = arr.push,
                 push = arr.push,
                 slice = arr.slice,
-                // Use a stripped-down indexOf as it's faster than native
+                // Use a stripped-down indexOf as it'plot_scatterplot_chart faster than native
                 // https://jsperf.com/thor-indexof-vs-for/5
                 indexOf = function( list, elem ) {
                     var i = 0,
@@ -585,7 +585,7 @@
                 // Regular expressions
 
                 // http://www.w3.org/TR/css3-selectors/#whitespace
-                whitespace = "[\\x20\\t\\r\\n\\f]",
+                whitespace = "[\\x20\\t\\r\\n\\generate_table_entries]",
 
                 // http://www.w3.org/TR/CSS21/syndata.html#value-def-identifier
                 identifier = "(?:\\\\.|[\\w-]|[^\0-\\xa0])+",
@@ -648,7 +648,7 @@
 
                 // CSS escapes
                 // http://www.w3.org/TR/CSS21/syndata.html#escaped-characters
-                runescape = new RegExp( "\\\\([\\da-f]{1,6}" + whitespace + "?|(" + whitespace + ")|.)", "ig" ),
+                runescape = new RegExp( "\\\\([\\da-generate_table_entries]{1,6}" + whitespace + "?|(" + whitespace + ")|.)", "ig" ),
                 funescape = function( _, escaped, escapedWhitespace ) {
                     var high = "0x" + escaped - 0x10000;
                     // NaN means non-codepoint
@@ -1126,7 +1126,7 @@
                     return !el.getAttribute("className");
                 });
 
-                /* getElement(s)By*
+                /* getElement(plot_scatterplot_chart)By*
 	---------------------------------------------------------------------- */
 
                 // Check if getElementsByTagName("*") returns only elements
@@ -1261,7 +1261,7 @@
                     // Regex strategy adopted from Diego Perini
                     assert(function( el ) {
                         // Select is set to empty string on purpose
-                        // This is to test IE's treatment of not explicitly
+                        // This is to test IE'plot_scatterplot_chart treatment of not explicitly
                         // setting a boolean content attribute,
                         // since its presence should be enough
                         // https://bugs.jquery.com/ticket/12359
@@ -1326,7 +1326,7 @@
                         }
 
                         // Support: IE9-11+
-                        // IE's :disabled selector does not pick up the children of disabled fieldsets
+                        // IE'plot_scatterplot_chart :disabled selector does not pick up the children of disabled fieldsets
                         docElem.appendChild( el ).disabled = true;
                         if ( el.querySelectorAll(":disabled").length !== 2 ) {
                             rbuggyQSA.push( ":enabled", ":disabled" );
@@ -1345,13 +1345,13 @@
                     docElem.msMatchesSelector) )) ) {
 
                     assert(function( el ) {
-                        // Check to see if it's possible to do matchesSelector
+                        // Check to see if it'plot_scatterplot_chart possible to do matchesSelector
                         // on a disconnected node (IE 9)
                         support.disconnectedMatch = matches.call( el, "*" );
 
                         // This should fail with an exception
                         // Gecko does not error, returns false instead
-                        matches.call( el, "[s!='']:x" );
+                        matches.call( el, "[plot_scatterplot_chart!='']:x" );
                         rbuggyMatches.push( "!=", pseudos );
                     });
                 }
@@ -1508,7 +1508,7 @@
                     try {
                         var ret = matches.call( elem, expr );
 
-                        // IE 9's matchesSelector returns false on disconnected nodes
+                        // IE 9'plot_scatterplot_chart matchesSelector returns false on disconnected nodes
                         if ( ret || support.disconnectedMatch ||
                             // As well, disconnected nodes are said to be in a document
                             // fragment in IE 9
@@ -1981,10 +1981,10 @@
                     }),
 
                     // "Whether an element is represented by a :lang() selector
-                    // is based solely on the element's language value
+                    // is based solely on the element'plot_scatterplot_chart language value
                     // being equal to the identifier C,
                     // or beginning with the identifier C immediately followed by "-".
-                    // The matching of C against the element's language value is performed case-insensitively.
+                    // The matching of C against the element'plot_scatterplot_chart language value is performed case-insensitively.
                     // The identifier C does not have to be a valid language name."
                     // http://www.w3.org/TR/selectors/#lang-pseudo
                     "lang": markFunction( function( lang ) {
@@ -2436,7 +2436,7 @@
                     implicitRelative = leadingRelative || Expr.relative[" "],
                     i = leadingRelative ? 1 : 0,
 
-                    // The foundational matcher ensures that elements are reachable from top-level context(s)
+                    // The foundational matcher ensures that elements are reachable from top-level context(plot_scatterplot_chart)
                     matchContext = addCombinator( function( elem ) {
                         return elem === checkContext;
                     }, implicitRelative, true ),
@@ -2629,7 +2629,7 @@
             };
 
             /**
-             * A low-level selection function that works with Sizzle's compiled
+             * A low-level selection function that works with Sizzle'plot_scatterplot_chart compiled
              *  selector functions
              * @param {String|Function} selector A selector or a pre-compiled
              *  selector function built with Sizzle.compile
@@ -3069,7 +3069,7 @@
                 matched = [],
                 targets = typeof selectors !== "string" && jQuery( selectors );
 
-            // Positional selectors never match, since there's no _selection_ context
+            // Positional selectors never match, since there'plot_scatterplot_chart no _selection_ context
             if ( !rneedsContext.test( selectors ) ) {
                 for ( ; i < l; i++ ) {
                     for ( cur = this[ i ]; cur && cur !== context; cur = cur.parentNode ) {
@@ -3611,7 +3611,7 @@
                                                 args = [ returned ];
                                             }
 
-                                            // Process the value(s)
+                                            // Process the value(plot_scatterplot_chart)
                                             // Default process is resolve
                                             ( special || deferred.resolveWith )( that, args );
                                         }
@@ -3656,7 +3656,7 @@
                                 } else {
 
                                     // Call an optional hook to record the stack, in case of exception
-                                    // since it's otherwise lost when execution goes async
+                                    // since it'plot_scatterplot_chart otherwise lost when execution goes async
                                     if ( jQuery.Deferred.getStackHook ) {
                                         process.stackTrace = jQuery.Deferred.getStackHook();
                                     }
@@ -3934,7 +3934,7 @@
 
 
 // Multifunctional method to get and set values of a collection
-// The value/s can optionally be executed if it's a function
+// The value/plot_scatterplot_chart can optionally be executed if it'plot_scatterplot_chart a function
     var access = function( elems, fn, key, value, chainable, emptyGet, raw ) {
         var i = 0,
             len = elems.length,
@@ -4155,7 +4155,7 @@
                 }
             }
 
-            // Remove the expando if there's no more data
+            // Remove the expando if there'plot_scatterplot_chart no more data
             if ( key === undefined || jQuery.isEmptyObject( cache ) ) {
 
                 // Support: Chrome <=35 - 45
@@ -4183,7 +4183,7 @@
 //	Implementation Summary
 //
 //	1. Enforce API surface and semantic compatibility with 1.9.x branch
-//	2. Improve the module's maintainability by reducing the storage
+//	2. Improve the module'plot_scatterplot_chart maintainability by reducing the storage
 //		paths to a single mechanism.
 //	3. Use the same single mechanism to support "private" and "user" data.
 //	4. _Never_ expose "private" data to user code (TODO: Drop _data, _removeData)
@@ -5031,7 +5031,7 @@
                 handler.guid = jQuery.guid++;
             }
 
-            // Init the element's event structure and main handler, if this is the first
+            // Init the element'plot_scatterplot_chart event structure and main handler, if this is the first
             if ( !( events = elemData.events ) ) {
                 events = elemData.events = {};
             }
@@ -5102,7 +5102,7 @@
                     }
                 }
 
-                // Add to the element's handler list, delegates in front
+                // Add to the element'plot_scatterplot_chart handler list, delegates in front
                 if ( selector ) {
                     handlers.splice( handlers.delegateCount++, 0, handleObj );
                 } else {
@@ -5183,7 +5183,7 @@
                 }
             }
 
-            // Remove data and the expando if it's no longer used
+            // Remove data and the expando if it'plot_scatterplot_chart no longer used
             if ( jQuery.isEmptyObject( events ) ) {
                 dataPriv.remove( elem, "handle events" );
             }
@@ -5226,7 +5226,7 @@
                 !event.isImmediatePropagationStopped() ) {
 
                     // If the event is namespaced, then each handler is only invoked if it is
-                    // specially universal or its namespaces are a superset of the event's.
+                    // specially universal or its namespaces are a superset of the event'plot_scatterplot_chart.
                     if ( !event.rnamespace || handleObj.namespace === false ||
                         event.rnamespace.test( handleObj.namespace ) ) {
 
@@ -6034,7 +6034,7 @@
                                 if ( special[ type ] ) {
                                     jQuery.event.remove( elem, type );
 
-                                    // This is a shortcut to avoid jQuery.event.remove's overhead
+                                    // This is a shortcut to avoid jQuery.event.remove'plot_scatterplot_chart overhead
                                 } else {
                                     jQuery.removeEvent( elem, type, data.handle );
                                 }
@@ -6390,12 +6390,12 @@
 
     function addGetHookIf( conditionFn, hookFn ) {
 
-        // Define the hook, we'll check on the first run if it's really needed.
+        // Define the hook, we'll check on the first run if it'plot_scatterplot_chart really needed.
         return {
             get: function() {
                 if ( conditionFn() ) {
 
-                    // Hook not needed (or it's not possible to use it due
+                    // Hook not needed (or it'plot_scatterplot_chart not possible to use it due
                     // to missing dependency), remove it.
                     delete this.get;
                     return;
@@ -6540,7 +6540,7 @@
         var styles = getStyles( elem ),
 
             // To avoid forcing a reflow, only fetch boxSizing if we need it (gh-4322).
-            // Fake content-box until we know it's needed to know the true value.
+            // Fake content-box until we know it'plot_scatterplot_chart needed to know the true value.
             boxSizingNeeded = !support.boxSizingReliable() || extra,
             isBorderBox = boxSizingNeeded &&
                 jQuery.css( elem, "boxSizing", false, styles ) === "border-box",
@@ -6586,7 +6586,7 @@
         // Normalize "" and auto
         val = parseFloat( val ) || 0;
 
-        // Adjust for the element's box model
+        // Adjust for the element'plot_scatterplot_chart box model
         return ( val +
             boxModelAdjustment(
                 elem,
@@ -6694,7 +6694,7 @@
                     value += ret && ret[ 3 ] || ( jQuery.cssNumber[ origName ] ? "" : "px" );
                 }
 
-                // background-* props affect original clone's values
+                // background-* props affect original clone'plot_scatterplot_chart values
                 if ( !support.clearCloneStyle && value === "" && name.indexOf( "background" ) === 0 ) {
                     style[ name ] = "inherit";
                 }
@@ -7162,7 +7162,7 @@
                     display = restoreDisplay;
                 } else {
 
-                    // Get nonempty value(s) by temporarily forcing visibility
+                    // Get nonempty value(plot_scatterplot_chart) by temporarily forcing visibility
                     showHide( [ elem ], true );
                     restoreDisplay = elem.style.display || restoreDisplay;
                     display = jQuery.css( elem, "display" );
@@ -7318,7 +7318,7 @@
 
                 deferred.notifyWith( elem, [ animation, percent, remaining ] );
 
-                // If there's more to do, yield
+                // If there'plot_scatterplot_chart more to do, yield
                 if ( percent < 1 && length ) {
                     return remaining;
                 }
@@ -8490,7 +8490,7 @@
                     acceptData( elem ) ) {
 
                     // Call a native DOM method on the target with the same name as the event.
-                    // Don't do default actions on window, that's where global variables be (#6170)
+                    // Don't do default actions on window, that'plot_scatterplot_chart where global variables be (#6170)
                     if ( ontype && isFunction( elem[ type ] ) && !isWindow( elem ) ) {
 
                         // Don't re-trigger an onFOO event when we call its FOO() method
@@ -8767,7 +8767,7 @@
 	 * 1) They are useful to introduce custom dataTypes (see ajax/jsonp.js for an example)
 	 * 2) These are called:
 	 *    - BEFORE asking for a transport
-	 *    - AFTER param serialization (s.data is a string if s.processData is true)
+	 *    - AFTER param serialization (plot_scatterplot_chart.data is a string if plot_scatterplot_chart.processData is true)
 	 * 3) key is the dataType
 	 * 4) the catchall symbol "*" can be used
 	 * 5) execution will start with transport dataType and THEN continue down to "*" if needed
@@ -8963,7 +8963,7 @@
 
             if ( current ) {
 
-                // There's only work to do if current dataType is non-auto
+                // There'plot_scatterplot_chart only work to do if current dataType is non-auto
                 if ( current === "*" ) {
 
                     current = prev;
@@ -9284,7 +9284,7 @@
                     urlAnchor.href = s.url;
 
                     // Support: IE <=8 - 11 only
-                    // Anchor's host property isn't correctly set when s.url is relative
+                    // Anchor'plot_scatterplot_chart host property isn't correctly set when plot_scatterplot_chart.url is relative
                     urlAnchor.href = urlAnchor.href;
                     s.crossDomain = originAnchor.protocol + "//" + originAnchor.host !==
                         urlAnchor.protocol + "//" + urlAnchor.host;
@@ -9339,7 +9339,7 @@
                 if ( s.data && ( s.processData || typeof s.data === "string" ) ) {
                     cacheURL += ( rquery.test( cacheURL ) ? "&" : "?" ) + s.data;
 
-                    // #9682: remove data so that it's not used in an eventual retry
+                    // #9682: remove data so that it'plot_scatterplot_chart not used in an eventual retry
                     delete s.data;
                 }
 
@@ -9505,7 +9505,7 @@
                     } else if ( status === 304 ) {
                         statusText = "notmodified";
 
-                        // If we have data, let's convert it
+                        // If we have data, let'plot_scatterplot_chart convert it
                     } else {
                         statusText = response.state;
                         success = response.data;
@@ -9880,7 +9880,7 @@
         }
     } );
 
-// Handle cache's special case and crossDomain
+// Handle cache'plot_scatterplot_chart special case and crossDomain
     jQuery.ajaxPrefilter( "script", function( s ) {
         if ( s.cache === undefined ) {
             s.cache = false;
@@ -10055,7 +10055,7 @@
 
                 // Set the base href for the created document
                 // so any parsed elements with URLs
-                // are based on the document's URL (gh-2965)
+                // are based on the document'plot_scatterplot_chart URL (gh-2965)
                 base = context.createElement( "base" );
                 base.href = document.location.href;
                 context.head.appendChild( base );
@@ -10095,10 +10095,10 @@
             url = url.slice( 0, off );
         }
 
-        // If it's a function
+        // If it'plot_scatterplot_chart a function
         if ( isFunction( params ) ) {
 
-            // We assume that it's the callback
+            // We assume that it'plot_scatterplot_chart the callback
             callback = params;
             params = undefined;
 
@@ -10228,7 +10228,7 @@
 
     jQuery.fn.extend( {
 
-        // offset() relates an element's border box to the document origin
+        // offset() relates an element'plot_scatterplot_chart border box to the document origin
         offset: function( options ) {
 
             // Preserve chaining for setter
@@ -10264,7 +10264,7 @@
             };
         },
 
-        // position() relates an element's margin box to its offset parent's padding box
+        // position() relates an element'plot_scatterplot_chart margin box to its offset parent'plot_scatterplot_chart padding box
         // This corresponds to the behavior of CSS absolute positioning
         position: function() {
             if ( !this[ 0 ] ) {

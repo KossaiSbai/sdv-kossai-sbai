@@ -3,12 +3,10 @@
   "version": "0.0.1",
   "description": "SDV project",
   "main": "index.js",
-  "dependencies": {
-    "gulp-util": "^3.0.8"
-  },
   "devDependencies": {
     "gulp": "^4.0.2",
-    "gulp-webserver": "^0.9.1"
+    "gulp-webserver": "^0.9.1",
+    "gulp-util": "^3.0.8"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -22,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/KossaiSbai/sdv-kossai-sbai/issues"
   },
-  "homepage": "https://github.com/KossaiSbai/sdv-kossai-sbai#readme"
+  "homepage": "https://github.com/KossaiSbai/sdv-kossai-sbai#readme",
+  "dependencies": {
+    "popper.js": "^1.16.1"
+  }
 }

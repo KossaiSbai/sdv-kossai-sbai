@@ -1,0 +1,100 @@
+
+
+.table-remastered
+{
+    border: 1px solid #272729;
+    box-shadow: 0 3px 3px 0 rgba(0,0,0,0.4);
+}
+
+span
+{
+    margin: 3px;
+    cursor: pointer;
+}
+
+.axisred line
+{
+    stroke: red;
+
+}
+
+.axis-label,.chart-title
+{
+    fill: #AAAAAA;
+    font-family: Georgia, serif;
+    font-size: 90%;
+}
+
+th
+{
+    white-space: nowrap;
+}
+
+.btn-d
+{
+    background-color:#272729;
+    color: white;
+    box-shadow:0 .125rem .25rem rgba(0,0,0,.075)!important
+}
+
+.btn-d:hover{
+    color: white;
+    background-color: #1E1E1E;
+}
+line.axis-ticks
+{
+    stroke:#343636;
+    stroke-width:2
+}
+
+text.axis-ticks{
+    fill: #AAAAAA;
+    font-family: Georgia, serif;
+    font-size: 110%;
+}
+
+.tooltip
+{
+    pointer-events: none;
+    text-align: center;
+    width: 90px;
+    padding: 5px;
+    background-color: #121212;
+    color: white;
+    border-radius: 6px;
+    box-shadow: 1px 1px 3px 0px rgba(0,0,0,0.6);
+}
+
+
+.nav
+{
+    background-color: #272729;
+}
+
+.navbar-brand
+{
+    color: white;
+}
+
+body
+{
+    background-color: #343636;
+}
+
+.dropdown-menu
+{
+    overflow-y: auto;
+    max-height: 100px;
+}
+
+g[id*='axis'] path
+{
+    stroke : #343636;
+    stroke-width:2;
+}
+
+/*#navbarNav li a*/
+/*{*/
+/*    color: white;*/
+/*}*/
+

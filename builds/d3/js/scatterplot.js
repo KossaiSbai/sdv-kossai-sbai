@@ -1,59 +1,45 @@
 var csv_data = [];
 const margin = { top: 60, bottom: 150, left: 100, right: 100 };
-const svg_fh = generate_svg("svg_fh");
-const svg_sh = generate_svg("svg_sh");
-console.log(svg_fh);
-const width = +svg_fh.attr("width") - margin.left - margin.right;
-const height = +svg_fh.attr("height") - margin.top - margin.bottom;
-const canvas_fh = add_canvas(svg_fh);
-const canvas_sh = add_canvas(svg_sh);
+var svg_fh, svg_sh = null;
+var canvas_fh, canvas_sh = null;
+var height, width = null;
 var xScale,yScale = null;
-var div = d3.select("body").append("div")
-    .attr("class", "tooltip")
-    .style("opacity", 0);
+var tooltip = null;
+
+/**
+ * Initialises svg containers as well as other components such as the navbar.
+ */
+function initialise() {
+    include_navbar();
+    make_nav_item_active("scatterplot-chart-item");
+    tooltip= generate_tooltip();
+    svg_fh = generate_svg("#scatterplot-chart",600,550,"svg_fh");
+    svg_sh = generate_svg("#scatterplot-chart",600,550,"svg_sh");
+    canvas_fh = add_canvas(svg_fh);
+    canvas_sh = add_canvas(svg_sh);
+    [width,height] = svg_dimensions(svg_fh);
+}
+
+
+
 
 d3.csv("dataset/understat_per_game.csv", function(d) {
 
     return {
-        league:d.league,
         year:d.year,
-        h_a:d.h_a,
         xG:parseFloat(d.xG),
-        xGA:parseFloat(d.xGA),
         npxG:parseFloat(d.npxG),
-        npxGA:parseFloat(d.npxGA),
-        deep:+d.deep,
-        deep_allowed:+d.deep_allowed,
         scored:+d.scored,
-        missed:+d.missed,
-        xpts:parseFloat(d.xG),
-        result:d.result,
-        date:d.date.split(" ")[0].toString(),
-        wins:+d.wins,
-        draws:+d.draws,
-        loses:+d.loses,
-        pts:+d.pts,
-        npxGD:parseFloat(d.xG),
-        ppda_coef:parseFloat(d.xG),
-        ppda_att:parseFloat(d.xG),
-        ppda_def:parseFloat(d.xG),
-        oppda_coef:parseFloat(d.xG),
-        oppda_att:parseFloat(d.xG),
-        oppda_def:parseFloat(d.xG),
         team:d.team,
-        xG_diff:parseFloat(d.xG),
-        xGA_diff:parseFloat(d.xG),
-        xpts_diff:parseFloat(d.xG)
 
     }
 }).then(function (data) {
-    include_navbar();
-    navbar("scatterplot-chart");
+    initialise();
     csv_data = data;
     allTeams = extract_all_teams(data);
     generateInput(allTeams,"team-dropdown","plot_scatterplot_chart","(this)");
-    var initial_data_scored = extract_data(data,"Barcelona","scored","xG");
-    var initial_data_npxG = extract_data(data,"Barcelona","npxG","xG");
+    var initial_data_scored = extract_data_scatterplot_chart(data,"Barcelona","scored","xG");
+    var initial_data_npxG = extract_data_scatterplot_chart(data,"Barcelona","npxG","xG");
     axisLabel(svg_fh,width/2 + margin.left, height + 2*margin.top, "Number of goals");
     axisLabel(svg_sh, width/2 + margin.left, height + 2*margin.top, "npxG");
     axisLabel(svg_fh,margin.left/2 , height/2, "xG","rotate(-90)");
@@ -64,7 +50,12 @@ d3.csv("dataset/understat_per_game.csv", function(d) {
 
 });
 
-
+/**
+ * Generates initial scatterplot chart.
+ * @param svg svg container
+ * @param canvas chart container
+ * @param data
+ */
 function scatterplot_chart(svg, canvas, data) {
 
     labels = [];
@@ -98,7 +89,12 @@ function scatterplot_chart(svg, canvas, data) {
     apply_axis_style();
 }
 
-
+/**
+ * Updates the scatterplot chart according to the new data.
+ * @param svg svg container
+ * @param canvas chart container
+ * @param data
+ */
 function update_scatterplot_chart(svg, canvas, data)
 {
 
@@ -134,6 +130,13 @@ function update_scatterplot_chart(svg, canvas, data)
 
 }
 
+/**
+ * Plots the line of best fit for the given scatterplot chart.
+ * @param svg svg container
+ * @param canvas chart container
+ * @param line best fit line.
+ * @param data
+ */
 function plot_fit_line(svg,canvas,line,data) {
     canvas.append("path")
         .datum(data)
@@ -145,6 +148,12 @@ function plot_fit_line(svg,canvas,line,data) {
         .attr("d", line);
 }
 
+/**
+ * Add area line to the chart
+ * @param max_x_value
+ * @param max_y_value
+ * @param canvas
+ */
 function update_axis(max_x_value, max_y_value,canvas) {
     canvas
         .select("#y-axis")
@@ -161,6 +170,11 @@ function update_axis(max_x_value, max_y_value,canvas) {
         .call(d3.axisBottom(xScale).ticks(x_ticks));
 }
 
+/**
+ * Computes the domains of the axis.
+ * @param data
+ * @return {*[]}
+ */
 function axisDomains(data)
 {
     xScale.domain(d3.extent(data, function (d) {
@@ -172,6 +186,10 @@ function axisDomains(data)
     return [xScale,yScale];
 }
 
+/**
+ * Adds the circles of the scatterplot chart.
+ * @param circles circle objects
+ */
 function scatterplot_circles(circles)
 {
     circles.transition()
@@ -190,7 +208,11 @@ function scatterplot_circles(circles)
         .style("fill","red");
 }
 
-
+/**
+ * Computes the biggest values for both the x_attribute and y_attribute.
+ * @param data
+ * @return {(never|number)[]}
+ */
 function compute_extreme_values(data)
 {
     var max_x_value = d3.max(data, function (d) {
@@ -204,6 +226,11 @@ function compute_extreme_values(data)
     return [max_x_value,max_y_value];
 }
 
+/**
+ * Generates the best fit line.
+ * @param data
+ * @return {}
+ */
 function fit_line(data)
 {
 
@@ -222,29 +249,15 @@ function fit_line(data)
         .curve(d3.curveLinear);
 }
 
-
-
-function generate_svg(id)
-{
-    return d3
-        .select("#scatterplot-chart")
-        .append("svg")
-        .attr("height", 650)
-        .attr("width", 550)
-        .attr("id",id);
-}
-
-function add_canvas(svg_container)
-{
-    var svg_id = $(svg_container)[0].attr("id");
-    return svg_container
-        .append("g")
-        .attr("transform", `translate(${margin.left},${margin.top})`).
-        attr("id",svg_id +" canvas");
-}
-
-
-function extract_data(data, team, x_attribute, y_attribute)
+/**
+ *
+ * @param data
+ * @param team
+ * @param x_attribute
+ * @param y_attribute
+ * @return {*}
+ */
+function extract_data_scatterplot_chart(data, team, x_attribute, y_attribute)
 {
     d = data.filter(function (e) {
         return e.team === team
@@ -260,6 +273,11 @@ function extract_data(data, team, x_attribute, y_attribute)
     })
 }
 
+/**
+ * Computes the equation of the line of best fit.
+ * @param data
+ * @return {number[]}
+ */
 function compute_fit_line_equation(data)
 {
     console.log(data);
@@ -278,7 +296,12 @@ function compute_fit_line_equation(data)
 }
 
 
-
+/**
+ * Generates the axis of the canvas.
+ * @param canvas chart container
+ * @param x_ticks
+ * @param y_ticks
+ */
 function generate_axis(canvas,x_ticks,y_ticks)
 {
     canvas
@@ -295,6 +318,12 @@ function generate_axis(canvas,x_ticks,y_ticks)
         .attr("transform", "translate(0,0)");
 }
 
+/**
+ * Creates the axis scales.
+ * @param height height of the svg container
+ * @param width width of the svg container
+ * @return {Object[]}
+ */
 function axisScales(height, width)
 {
 
@@ -305,16 +334,18 @@ function axisScales(height, width)
     let yScale = d3.scaleLinear()
         .range([height, 0]);
 
-
     return [xScale,yScale]
 }
 
-
+/**
+ * Plots the scatterplot chart according to the given team.
+ * @param a the dropdown item. On click a given team is inputted.
+ */
 function plot_scatterplot_chart(a)
 {
     var enteredValue = $(a).text();
-    var xG_scored_data = extract_data(csv_data,enteredValue,"scored","xG");
-    var xG_npxG_data = extract_data(csv_data,enteredValue,"npxG","xG");
+    var xG_scored_data = extract_data_scatterplot_chart(csv_data,enteredValue,"scored","xG");
+    var xG_npxG_data = extract_data_scatterplot_chart(csv_data,enteredValue,"npxG","xG");
     update_scatterplot_chart(svg_fh,canvas_fh,xG_scored_data,"scored","xG");
     update_scatterplot_chart(svg_sh,canvas_sh,xG_npxG_data,"npxG","xG");
 }

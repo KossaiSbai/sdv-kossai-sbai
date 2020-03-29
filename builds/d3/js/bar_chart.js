@@ -1,17 +1,12 @@
+
+var tooltip = null;
 var csv_data = [];
-const svg_fh = generate_svg("svg_fh");
-const svg_sh = generate_svg("svg_sh");
+var svg_fh, svg_sh = null;
+var canvas_fh, canvas_sh = null;
 const margin = { top: 50, bottom: 100, left: 50, right: 50 };
-const width = +svg_fh.attr("width") - margin.left - margin.right;
-const height = +svg_fh.attr("height") - margin.top - margin.bottom;
-// add_canvas(svg_sh);
-const canvas_fh = add_canvas(svg_fh);
-const canvas_sh = add_canvas(svg_sh);
+var width,height = null;
 var xScale,yScale = null;
-var div = d3.select("body").append("div")
-    .attr("class", "tooltip")
-    .style("opacity", 0);
-const seasons = ["2014/2015","2015/2016","2016/2017","2017/2018","2018/2019","2019/2020"];
+var seasons = null;
 const colorScheme = d3.scaleOrdinal()
     .domain(["xG","npxG","scored"])
     .range(['#EE3A43','#FF5F00','#F79E1B']);
@@ -20,78 +15,55 @@ var current_team,current_season = "";
 const y_fields = ["xG","npxG","scored"];
 
 
-function generate_svg(id)
-{
-    return d3
-        .select("#bar-chart")
-        .append("svg")
-        .attr("height", 620)
-        .attr("width", 550)
-        .attr("id",id);
+/**
+ * Initialises svg containers as well as other components such as the navbar.
+ */
+function initialise() {
+    include_navbar();
+    make_nav_item_active("bar-chart-item");
+    tooltip= generate_tooltip();
+    svg_fh = generate_svg("#bar-chart",600,550,"svg_fh");
+    svg_sh = generate_svg("#bar-chart",600,550,"svg_sh");
+    canvas_fh = add_canvas(svg_fh);
+    canvas_sh = add_canvas(svg_sh);
+    [width,height] = svg_dimensions(svg_fh);
 }
 
-function add_canvas(svg_container)
-{
-    var svg_id = $(svg_container)[0].attr("id");
-    return svg_container
-        .append("g")
-        .attr("transform", `translate(${margin.left},${margin.top})`).
-        attr("id",svg_id +" canvas");
-}
 
 d3.csv("dataset/understat_per_game.csv", function(d) {
 
     return {
-        league:d.league,
         year:d.year,
-        h_a:d.h_a,
         xG:parseFloat(d.xG),
-        xGA:parseFloat(d.xGA),
         npxG:parseFloat(d.npxG),
-        npxGA:parseFloat(d.npxGA),
-        deep:+d.deep,
-        deep_allowed:+d.deep_allowed,
         scored:+d.scored,
-        missed:+d.missed,
-        xpts:parseFloat(d.xG),
-        result:d.result,
         date:d.date.split(" ")[0].toString(),
-        wins:+d.wins,
-        draws:+d.draws,
-        loses:+d.loses,
-        pts:+d.pts,
-        npxGD:parseFloat(d.xG),
-        ppda_coef:parseFloat(d.xG),
-        ppda_att:parseFloat(d.xG),
-        ppda_def:parseFloat(d.xG),
-        oppda_coef:parseFloat(d.xG),
-        oppda_att:parseFloat(d.xG),
-        oppda_def:parseFloat(d.xG),
         team:d.team,
-        xG_diff:parseFloat(d.xG),
-        xGA_diff:parseFloat(d.xG),
-        xpts_diff:parseFloat(d.xG)
-
     }
+
 }).then(function (data) {
-    include_navbar();
-    navbar("bar-chart");
+    initialise();
     csv_data = data;
     const allTeams = extract_all_teams(data);
+    seasons = extract_all_seasons(data);
     generateInput(allTeams,"team-dropdown",'team_clicked','(this)');
     generateInput(seasons,"season-dropdown",'season_clicked','(this)');
-    legend();
+    add_legend();
     current_season = "2016/2017";
     current_team = "Arsenal";
-    var [fh,sh] = extract_data(csv_data,current_team,current_season);
+    var [fh,sh] = extract_bar_chart_data(csv_data,current_team,current_season);
     chart_title(svg_fh,current_team + " Season " + current_season+ " First half",(0.5*width+margin.left),margin.top/2);
     chart_title(svg_sh,current_team+ " Season " + current_season + " Second half",(0.5*width+margin.left),margin.top/2);
-    stack_bar_chart(svg_fh,fh, canvas_fh, div);
-    stack_bar_chart(svg_sh,sh, canvas_sh, div);
+    stack_bar_chart(svg_fh,fh, canvas_fh, tooltip);
+    stack_bar_chart(svg_sh,sh, canvas_sh, tooltip);
     window.onresize = resize;
 });
 
-
+/**
+ * Generates the axis
+ * @param canvas chart container
+ * @param x_ticks number of ticks for x_axis.
+ */
 function generate_axis(canvas,x_ticks = 15)
 {
     canvas
@@ -107,6 +79,10 @@ function generate_axis(canvas,x_ticks = 15)
         .attr("transform", "translate(0,0)");
 }
 
+/**
+ * Generates bar chart using the current team and the season inputted by the <a> element.
+ * @param a the dropdown item. On click a given season is inputted.
+ */
 function season_clicked(a)
 {
     current_season = $(a).text();
@@ -114,6 +90,10 @@ function season_clicked(a)
 
 }
 
+/**
+ * Generates bar chart using the current season and the team inputted by the <a> element.
+ * @param a the dropdown item. On click a given season is inputted.
+ */
 function team_clicked(a)
 {
     current_team = $(a).text();
@@ -121,18 +101,26 @@ function team_clicked(a)
 }
 
 
+/**
+ * Generates bar chart using the current season and the current team.
+ */
 function generate_bar_charts()
 {
-
-    var [fh,sh] = extract_data(csv_data,current_team,current_season);
+    var [fh,sh] = extract_bar_chart_data(csv_data,current_team,current_season);
     svg_fh.select(".chart-title").text(current_team + " Season " + current_season + " First half");
     svg_sh.select(".chart-title").text(current_team + " Season " + current_season + " Second half");
-    update_stack_bar_chart(fh, canvas_fh, div);
-    update_stack_bar_chart(sh, canvas_sh, div);
+    update_stack_bar_chart(fh, canvas_fh, tooltip);
+    update_stack_bar_chart(sh, canvas_sh, tooltip);
 }
 
 
-
+/**
+ * Computes the scales associated to the two axis.
+ * @param height height of the svg main container
+ * @param width  width of the svg main container
+ * @param data
+ * @returns {Array}
+ */
 function axisScales(height, width, data)
 {
 
@@ -154,16 +142,34 @@ function axisScales(height, width, data)
     return [xScale,yScale]
 }
 
-
-function extract_data(data,team,season) {
+/**
+ * Extracts data plotted in the bar chart: xG, npxG and number of goals for a given team across a season.
+ * @param data
+ * @param team
+ * @param season e.g. "2014/2015"
+ * @returns {*[]}
+ */
+function extract_bar_chart_data(data,team,season) {
     var years = season.split("/");
     var first_year = years[0];
     var second_year = years[1];
     var first_half_result = extract_season_part_data(first_year,first_year,data,team);
     var second_half_result = extract_season_part_data(first_year,second_year,data,team);
+
     return [first_half_result, second_half_result];
 }
 
+/**
+ * Extracts bar chart data for a season part.
+ * In a given season, for instance 2014/2015, there are two time parts: 2014 and 2015.
+ * Hence the first half of the season is made of all the matches from the beginning of the season until end of 2014.
+ * The second half of the season is made of all the matches from the beginning of 2015 until the end of the season.
+ * @param season_year For 2014/2015, it is 2014.
+ * @param current_year For 2014/2015, either 2014 or 2015.
+ * @param data
+ * @param team
+ * @returns {Object[]}
+ */
 function extract_season_part_data(season_year, current_year,data,team)
 {
     return data.filter(function (d) {
@@ -172,6 +178,13 @@ function extract_season_part_data(season_year, current_year,data,team)
 
 }
 
+/**
+ * Generates the initial stack bar chart.
+ * @param svg svg container
+ * @param data
+ * @param canvas chart container
+ * @param tooltip rectangular container displaying data value when a circle is moused over.
+ */
 function stack_bar_chart(svg,data, canvas, tooltip)
 {
 
@@ -206,6 +219,12 @@ function stack_bar_chart(svg,data, canvas, tooltip)
     apply_axis_style();
 }
 
+/**
+ * Updates the existing stack bar chart according to the new season/team.
+ * @param data
+ * @param canvas chart container.
+ * @param tooltip rectangular container displaying data value when a rectangle is moused over.
+ */
 function update_stack_bar_chart(data, canvas, tooltip)
 {
     [xScale,yScale] = axisScales(height,width,data);
@@ -241,6 +260,10 @@ function update_stack_bar_chart(data, canvas, tooltip)
 
 }
 
+/**
+ * Converts the rough data into stack format data.
+ * @returns {*}
+ */
 function generate_stack_data() {
     return d3.stack()
         .keys(y_fields)
@@ -249,6 +272,11 @@ function generate_stack_data() {
 
 }
 
+/**
+ * Updates the axis dynamically according to the data of the area chart.
+ * @param dates number of matches displayed in the bar chart.
+ * @param canvas chart container.
+ */
 function update_axis(dates,canvas)
 {
     canvas
@@ -265,6 +293,11 @@ function update_axis(dates,canvas)
         .call(d3.axisBottom(xScale).ticks(dates.length));
 }
 
+/**
+ * Add mouse transitions to tooltip.
+ * @param rects rectangles of the bar chart.
+ * @param tooltip rectangular container displaying data value when a rectangle is moused over.
+ */
 function mouse_tooltip_transitions(rects,tooltip) {
     rects .on("mouseover",function (d) {
         tooltip.transition()
@@ -284,7 +317,10 @@ function mouse_tooltip_transitions(rects,tooltip) {
         })
 }
 
-
+/**
+ * Adds the rectangles of the legend.
+ * @param width svg legend container width.
+ */
 function add_legend_rectangles(width)
 {
     d3.select("#svg-legend")
@@ -306,6 +342,10 @@ function add_legend_rectangles(width)
 }
 
 
+/**
+ * Adds the texts of the legend. Each text displays a property plotted on the bar chart.
+ * @param width svg legend container width.
+ */
 function add_legend_text(width)
 {
     d3.select("#svg-legend")
@@ -328,15 +368,20 @@ function add_legend_text(width)
         .style("alignment-baseline", "middle")
 }
 
-
-function legend()
+/**
+ * Adds the legend.
+ */
+function add_legend()
 {
     var width = $("#svg-legend")[0].getBoundingClientRect().width;
     add_legend_rectangles(width);
     add_legend_text(width);
 }
 
-
+/**
+ * Resizes the rectangles of the legend when the window resizes.
+ * @param width width of the svg container.
+ */
 function resize_legend_rectangles(width)
 {
     d3.select("#svg-legend")
@@ -351,6 +396,10 @@ function resize_legend_rectangles(width)
 
 }
 
+/**
+ * Resizes the texts of the legend when the window resizes.
+ * @param width width of the svg container.
+ */
 function resize_legend_text(width)
 {
     d3.select("#svg-legend")
@@ -364,20 +413,12 @@ function resize_legend_text(width)
         })
 
 }
+
+/**
+ * Resizes the legend container when the window resizes.
+*/
 function resize() {
     var width = $("#svg-legend")[0].getBoundingClientRect().width;
     resize_legend_rectangles(width);
     resize_legend_text(width);
 }
-
-
-
-function chart_title(svg, text)
-{
-    svg.select(".chart-title")
-        .attr("transform", "translate(" + (width + margin.left)/2 + "," + margin.top/2 + ")")
-        .style("text-anchor", "middle")
-        .attr("class","chart-title")
-        .text(text);
-}
-

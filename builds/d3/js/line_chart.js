@@ -1,53 +1,37 @@
 const colors = d3.schemeSet3;
-const svg = d3
-    .select("#chart")
-    .append("svg")
-    .attr("height", 500)
-    .attr("width", 800);
+var svg = null;
 const margin = { top: 60, bottom: 70, left: 100, right: 100 };
-const chart = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`).attr("id","canvas");
-const width = +svg.attr("width") - margin.left - margin.right;
-const height = +svg.attr("height") - margin.top - margin.bottom;
+var canvas = null;
+var width,height = null;
 var max_victories,xScale,yScale,allTeams = null;
 var displayed_data = [];
 var csv_data = [];
 var current_teams = [];
 
 
-
+/**
+ * Initialises svg containers as well as other components such as the navbar.
+ */
+function initialise()
+{
+    include_navbar();
+    make_nav_item_active("line-chart-item");
+    tooltip= generate_tooltip();
+    svg = generate_svg("#line-chart",650,800);
+    canvas = add_canvas(svg);
+    [width,height] = svg_dimensions(svg);
+}
 
 d3.csv("dataset/understat.com.csv", function(d) {
-    return {
-        league:d.league,
+return {
         season:+d.year,
-        position:+d.position,
         team:d.team,
-        matches:+d.matches,
         wins:+d.wins,
-        draws:+d.draws,
-        loses:+d.loses,
-        missed:+d.loses,
-        pts:+d.pts,
-        xG: parseFloat(d.xG),
-        xG_diff:parseFloat(d.xG_diff),
-        npxG:parseFloat(d.npxG),
-        xGA:parseFloat(d.xGA),
-        xGA_diff:parseFloat(d.xGA_diff),
-        npxGA:parseFloat(d.npxGA),
-        npxGD:parseFloat(d.npxGD),
-        ppda_coef:parseFloat(d.ppda_coef),
-        oppda_coef:parseFloat(d.oppda_coef),
-        deep:+d.deep,
-        deep_allowed:+d.deep_allowed,
-        xpts:parseFloat(d.xpts),
-        xpts_diff: parseFloat(d.xpts_diff),
-
-    }
+}
 
 
 }).then(function (data) {
-    include_navbar();
-    navbar("line-chart");
+    initialise();
     csv_data = data;
     allTeams = extract_all_teams(csv_data);
 
@@ -56,12 +40,11 @@ d3.csv("dataset/understat.com.csv", function(d) {
     }));
 
     [xScale,yScale] = axisScales(height,width,max_victories);
-    console.log(yScale(0));
 
     chart_title(svg,"Number of victories across seasons",(0.5*width+margin.left),margin.top/3);
     generate_axis();
 
-    generateInput(allTeams,"team-dropdown",'addTeam','(this)');
+    generateInput(allTeams,"team-dropdown",'add_team_line','(this)');
 
     axisLabel(svg,margin.left/2 , height/2, "Victories","rotate(-90)");
     axisLabel(svg,width/2 + margin.left, height + margin.top + 45, "Season");
@@ -71,22 +54,32 @@ d3.csv("dataset/understat.com.csv", function(d) {
 
 });
 
+/**
+ * Generates the axis of the chart
+ */
 function generate_axis()
 {
-    chart
+    canvas
         .append("g")
         .attr("id","x-axis")
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(xScale).ticks(5));
 
 
-    chart
+    canvas
         .append("g")
         .attr("id","y-axis")
         .attr("transform", "translate(0,0)")
         .call(d3.axisLeft(yScale));
 }
 
+/**
+ * Computes the scales associated to the two axis.
+ * @param height height of the svg main container
+ * @param width  width of the svg main container
+ * @param upperElement biggest number of victories in the data.
+ * @returns {Array}
+ */
 function axisScales(height, width, upperElement)
 {
 
@@ -104,10 +97,17 @@ function axisScales(height, width, upperElement)
     return [xScale,yScale]
 }
 
-
-function addLine(data, color, margin, xScale, yScale)
+/**
+ * Plots the line chart according to the data.
+ * This line represents the number of victories of a team across seasons.
+ * @param data victories of the team.
+ * @param color color of the line.
+ * @param margin svg container margin.
+ * @param xScale scale of the x-axis.
+ * @param yScale scale of the y-axis.
+ */
+function plot_line_chart(data, color, margin, xScale, yScale)
 {
-    console.log(data);
     displayed_data =displayed_data.concat(data);
     var team = data[0].team;
     current_teams.push(team);
@@ -130,10 +130,8 @@ function addLine(data, color, margin, xScale, yScale)
     var totalLength = path.node().getTotalLength();
     animate_line(path,totalLength);
 
-    var div = d3.select("body").append("div")
-        .attr("class", "tooltip")
-        .style("opacity", 0);
-    generate_line_points(div,color,team);
+    var tooltip = generate_tooltip();
+    generate_line_points(tooltip,color,team);
 
     var entries_per_row = 4;  // number of columns
     var row_interval = 200;
@@ -146,6 +144,15 @@ function addLine(data, color, margin, xScale, yScale)
 
 }
 
+
+/**
+ * Appends the line to the chart itself.
+ * @param lines_canvas chart container.
+ * @param data data victories of the team.
+ * @param color color of the line.
+ * @param d3_line
+ * @returns {*|jQuery} the path tag encoding the line.
+ */
 function generate_line(lines_canvas,data,color,d3_line)
 {
    return lines_canvas.append("path")
@@ -159,6 +166,11 @@ function generate_line(lines_canvas,data,color,d3_line)
         .attr("d", d3_line);
 }
 
+/**
+ * Animates the plotting of the line.
+ * @param path_element path tag associated to the line
+ * @param node_length length of the line element.
+ */
 function animate_line(path_element, node_length)
 {
     path_element.attr("stroke-dasharray", node_length + " " + node_length)
@@ -170,6 +182,14 @@ function animate_line(path_element, node_length)
 
 }
 
+/**
+ * Adds the circles of the legend representing each team plotted on the chart.
+ * @param legend_svg svg container of the legend.
+ * @param row_interval space interval coefficient between each element of a row
+ * @param entries_per_row number of teams displayed in one row of the legend.
+ * @param column_interval space interval coefficient between each element of a column.
+ * @param team team represented by the line.
+ */
 function generate_circles_of_legend(legend_svg,row_interval,entries_per_row,column_interval,team)
 {
     legend_svg.append("circle")
@@ -182,6 +202,14 @@ function generate_circles_of_legend(legend_svg,row_interval,entries_per_row,colu
         });
 }
 
+/**
+ * Generates the lines svg elements of the legend.
+ * @param legend_svg legend_svg svg container of the legend.
+ * @param row_interval space interval coefficient between each element of a row
+ * @param entries_per_row number of teams displayed in one row of the legend.
+ * @param column_interval space interval coefficient between each element of a column.
+ * @param team team represented by the line.
+ */
 function generate_lines_of_legend(legend_svg,row_interval,entries_per_row,column_interval,team)
 {
     legend_svg.append("svg")
@@ -197,6 +225,15 @@ function generate_lines_of_legend(legend_svg,row_interval,entries_per_row,column
         });
 }
 
+/**
+ * Generates the text svg elements of the legend.
+ * Each text displays a team for example: "Barcelona".
+ * @param legend_svg legend_svg svg container of the legend.
+ * @param row_interval space interval coefficient between each element of a row
+ * @param entries_per_row number of teams displayed in one row of the legend.
+ * @param column_interval space interval coefficient between each element of a column.
+ * @param team team represented by the line.
+ */
 function generate_text_of_legend(legend_svg,row_interval,entries_per_row,column_interval,team)
 {
     legend_svg.append("text")
@@ -212,6 +249,15 @@ function generate_text_of_legend(legend_svg,row_interval,entries_per_row,column_
 }
 
 
+/**
+ * Generates the legend.
+ * Appends all the legend elements to the legend container.
+ * @param legend_svg legend_svg svg container of the legend.
+ * @param row_interval space interval coefficient between each element of a row
+ * @param entries_per_row number of teams displayed in one row of the legend.
+ * @param column_interval space interval coefficient between each element of a column.
+ * @param team team represented by the line.
+ */
 function generate_legend(legend_svg,row_interval,entries_per_row,column_interval,team)
 {
     generate_circles_of_legend(legend_svg,row_interval,entries_per_row,column_interval,team);
@@ -219,10 +265,16 @@ function generate_legend(legend_svg,row_interval,entries_per_row,column_interval
     generate_text_of_legend(legend_svg,row_interval,entries_per_row,column_interval,team);
 }
 
+/**
+ * Adds the data points to a given line.
+ * @param tooltip rectangular container displaying data value when a circle is moused over.
+ * @param color
+ * @param team team represented by the line.
+ */
 function generate_line_points(tooltip,color,team)
 {
 
-    chart
+    canvas
         .selectAll("circle")
         .data(displayed_data).enter()
         .append("circle")
@@ -252,6 +304,10 @@ function generate_line_points(tooltip,color,team)
 
 }
 
+/**
+ * Removes a given line from the chart.
+ * @param team team represented by the line.
+ */
 function removeLine(team)
 {
     displayed_data = displayed_data.filter(function (e) {
@@ -263,10 +319,12 @@ function removeLine(team)
     d3.select("#" + team + "-line").remove();
     d3.selectAll("#" + team + "-point").remove();
 
-    repositionLegendItems();
+    update_line_chart();
 }
 
-
+/**
+ * Updates the lines of the chart after removal of another one.
+ */
 function update_lines() {
     $('*[id*=line]').each(function() {
         var line = d3.select(this).select('path');
@@ -276,6 +334,9 @@ function update_lines() {
     });
 }
 
+/**
+ * Updates the points of the existing lines of the chart after removal of another one.
+ */
 function update_points_of_lines() {
     $('*[id*=point]').each(function () {
         var circle = d3.select(this);
@@ -285,6 +346,14 @@ function update_points_of_lines() {
     });
 }
 
+
+/**
+ * Updates the existing points of the legend after removal of another one.
+ * @param legend legend_svg svg container of the legend.
+ * @param row_interval space interval coefficient between each element of a row
+ * @param entries_per_row number of teams displayed in one row of the legend.
+ * @param column_interval space interval coefficient between each element of a column.
+ */
 function update_points_of_legend(legend,row_interval,entries_per_row,column_interval)
 {
 
@@ -300,6 +369,13 @@ function update_points_of_legend(legend,row_interval,entries_per_row,column_inte
     });
 }
 
+/**
+ * Updates the existing texts of the legend after removal of another one.
+ * @param legend legend_svg svg container of the legend.
+ * @param row_interval space interval coefficient between each element of a row
+ * @param entries_per_row number of teams displayed in one row of the legend.
+ * @param column_interval space interval coefficient between each element of a column.
+ */
 function update_text_of_legend(legend,row_interval,entries_per_row,column_interval)
 {
     legend.selectAll("text").each(function () {
@@ -316,6 +392,13 @@ function update_text_of_legend(legend,row_interval,entries_per_row,column_interv
     });
 }
 
+/**
+ * Updates the existing lines of the legend after removal of another one.
+ * @param legend legend_svg svg container of the legend.
+ * @param row_interval space interval coefficient between each element of a row
+ * @param entries_per_row number of teams displayed in one row of the legend.
+ * @param column_interval space interval coefficient between each element of a column.
+ */
 function update_lines_of_legend(legend,row_interval,entries_per_row,column_interval)
 {
     legend.selectAll("line").each(function () {
@@ -331,13 +414,24 @@ function update_lines_of_legend(legend,row_interval,entries_per_row,column_inter
     });
 }
 
+/**
+ *  * Updates the legend after removal of a line.
+ * @param legend legend_svg svg container of the legend.
+ * @param row_interval space interval coefficient between each element of a row
+ * @param entries_per_row number of teams displayed in one row of the legend.
+ * @param column_interval space interval coefficient between each element of a column.
+ */
 function update_legend(legend,row_interval,entries_per_row,column_interval) {
     update_points_of_legend(legend,row_interval,entries_per_row,column_interval);
     update_lines_of_legend(legend,row_interval,entries_per_row,column_interval);
     update_text_of_legend(legend,row_interval,entries_per_row,column_interval);
 
 }
-function repositionLegendItems() {
+
+/**
+ * Updates the whole chart (both lines and legend) after removal of a line.
+ */
+function update_line_chart() {
     var entries_per_row = 4;  // number of columns
     var row_interval = 200;
     var column_interval = 40;
@@ -350,14 +444,17 @@ function repositionLegendItems() {
 }
 
 
-
-function addTeam(a) {
+/**
+ * Plots a line associated to an inputted team. Updates accordingly the chart and the legend.
+ * @param a dropdown item. On click a given team is inputted.
+ */
+function add_team_line(a) {
     var enteredValue = $(a).text();
     if (!allTeams.includes(enteredValue)) alert("This team is not valid");
     else if(current_teams.includes(enteredValue)) alert("This team is already on the plot");
     else {
-        team_data = csv_data.filter(d => d.team.localeCompare(enteredValue) === 0);
-        addLine(team_data, colors[current_teams.length], margin, xScale, yScale);
+        var team_data = csv_data.filter(d => d.team.localeCompare(enteredValue) === 0);
+        plot_line_chart(team_data, colors[current_teams.length], margin, xScale, yScale);
     }
 }
 

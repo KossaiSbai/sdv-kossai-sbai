@@ -1,9 +1,11 @@
 
-csv_data = [];
+var csv_data = [];
 var current_displayed_data = [];
 var all_leagues = null;
 var properties = ['season','team',"position","matches","wins","draws","loses","pts","xG","xGA"];
 var columns = ['Season','Team',"Position","Matches","Wins","Draws","Loses","Points","xG","xGA"];
+
+
 d3.csv("dataset/understat.com.csv", function(d) {
     return {
         league:d.league,
@@ -14,50 +16,31 @@ d3.csv("dataset/understat.com.csv", function(d) {
         wins:+d.wins,
         draws:+d.draws,
         loses:+d.loses,
-        missed:+d.loses,
         pts:+d.pts,
         xG: Math.round(parseFloat(d.xG)),
-        xG_diff:parseFloat(d.xG_diff),
-        npxG:parseFloat(d.npxG),
         xGA:Math.round(parseFloat(d.xGA)),
-        xGA_diff:parseFloat(d.xGA_diff),
-        npxGA:parseFloat(d.npxGA),
-        npxGD:parseFloat(d.npxGD),
-        ppda_coef:parseFloat(d.ppda_coef),
-        oppda_coef:parseFloat(d.oppda_coef),
-        deep:+d.deep,
-        deep_allowed:+d.deep_allowed,
-        xpts:Math.round(parseFloat(d.xpts)),
-        xpts_diff: parseFloat(d.xpts_diff),
-
-
     }
 
 
 }).then(function (data) {
     include_navbar();
-    navbar("table");
+    navbar("table-item");
     csv_data = data;
     reset_button();
     all_leagues = extract_all_leagues(data);
     generateInput(all_leagues,"league-dropdown","load_table","(this)");
-    table_data = extract_table_data(select_league_data("La_liga",data));
+    var table_data = select_league_data("La_liga",data);
     current_displayed_data = table_data;
     generate_table(table_data,columns,properties);
 });
 
-function extract_all_leagues(data)
-{
-    var leagues_set = new Set();
-    for(let i=0; i<data.length; i++)
-    {
-        var league = data[i].league;
-        leagues_set.add(league)
-    }
-    return Array.from(leagues_set);
-}
 
-
+/**
+ * Returns the table data for the selected league.
+ * @param league
+ * @param data
+ * @returns {Array}
+ */
 function select_league_data(league,data)
 {
     return data.filter(function (e) {
@@ -66,31 +49,38 @@ function select_league_data(league,data)
 }
 
 
-function filter_out(e, property, value) {
-    if(!isNaN(value)) {
-        return e[property] >= value;
-    }
-    else return e[property].localeCompare(value) === 0;
-}
-
-
-
-function extract_table_data(data,n=data.length)
+/**
+ * Builds the sorting buttons.
+ * @param headers table headers
+ * @param button_class increasing or decreasing symbol
+ * @param asc ascending or decreasing sorting order
+ */
+function sorting_buttons(headers,button_class,asc)
 {
-    var table_data = [];
-    for(let i=0; i<n; i++)
-    {
-        table_data.push(data[i]);
-    }
-    return table_data;
+headers.append('span')
+    .append('i')
+    .attr('class',button_class)
+    .attr('id',function (p,i) {
+        return "th- " + properties[i]
+    })
+    .on('click',function () {
+        var property = event.target.id.split(" ")[1];
+        var sorted_data = sort_data(current_displayed_data,property,asc);
+        update(sorted_data,properties);
+    });
 }
 
-
+/**
+ * Generates the table.
+ * @param data
+ * @param columns columns headers
+ * @param properties properties of the dataset
+ */
 function generate_table(data,columns,properties) {
     var table = d3.select('table');
     var thead = table.append('thead');
     thead.style('background-color', '#272729');
-    var s = thead.append('tr')
+    var t_headers = thead.append('tr')
         .selectAll('th')
         .data(columns)
         .enter()
@@ -100,38 +90,19 @@ function generate_table(data,columns,properties) {
         })
         .attr('class','text-center')
         .append('row');
-        s
-        .append('span')
-        .append('i')
-        .attr('class','fas fa-sort-up')
-        .attr('id',function (p,i) {
-            return "th- " + properties[i]
-        })
-        .on('click',function f1() {
-            var property = event.target.id.split(" ")[1];
-            sorted_data = sort_data(current_displayed_data,property,true);
-            console.log(sorted_data);
-            update(sorted_data,properties);
-        });
-    s
-        .append('span')
-        .append('i')
-        .attr('class','fas fa-sort-down')
-        .attr('id',function (p,i) {
-            return "th- " + properties[i]
-        })
-        .on('click',function f1() {
-            var property = event.target.id.split(" ")[1];
-            sorted_data = sort_data(current_displayed_data,property,false);
-            console.log(sorted_data);
-            update(sorted_data,properties);
-        });
+        sorting_buttons(t_headers,'fas fa-sort-up',true);
+        sorting_buttons(t_headers,'fas fa-sort-down',false);
 
     table.append('tbody');
     generate_table_entries(data,properties);
 
 }
 
+/**
+ * Generates the entries of the table (data rows).
+ * @param data
+ * @param properties
+ */
 function generate_table_entries(data, properties) {
     var rows = d3.select('tbody').selectAll('tr')
         .data(data)
@@ -153,7 +124,12 @@ function generate_table_entries(data, properties) {
 
 }
 
-function update(data,properties)
+/**
+ * Updates the table with new data.
+ * @param data
+ * @param properties
+ */
+function update_table(data,properties)
 {
     current_displayed_data = data;
     d3.select("tbody").selectAll('tr')
@@ -167,14 +143,17 @@ function update(data,properties)
         })
         .text(function (d) {
             return d;
-        })
-        .exit()
-        .remove();
-console.log(current_displayed_data);
+        });
 }
 
 
-
+/**
+ * Sorts the data according to a given property and sorting order.
+ * @param data
+ * @param property
+ * @param asc true if ascending order false otherwise.
+ * @returns {Array}
+ */
 function sort_data(data, property, asc) {
     data.sort(function(a, b) {
         if(asc) return d3.ascending(a[property], b[property]);
@@ -183,30 +162,32 @@ function sort_data(data, property, asc) {
 return data;
 }
 
-
-function filter_out_data_by_property(property, value, data, filter_out)
-{
-    return data.filter(e => filter_out(e,property,value))
-}
-
-
+/**
+ * Loads the updated table to the page.
+ * @param a the dropdown item. On click a given league is inputted.
+ */
 function load_table(a)
 {
     var enteredValue = $(a).text();
-    table_data = extract_table_data(select_league_data(enteredValue,csv_data));
-    console.log(this.unsorted_data);
+    var table_data = select_league_data(enteredValue,csv_data);
     update(table_data,properties);
 }
 
+/**
+ * Builds the reset button: on click, it displays the original league data as it was in the dataset.
+ */
 function reset_button()
 {
     d3.select("#reset").attr("onclick","display_initial_data()")
 }
 
+/**
+ * Displays the original league data as it was in the dataset.
+ */
 function display_initial_data()
 {
-    current_league = current_displayed_data[0].league;
-    table_data = extract_table_data(select_league_data(current_league,csv_data));
-    update(table_data,properties);
+    var current_league = current_displayed_data[0].league;
+    var table_data = select_league_data(current_league,csv_data);
+    update_table(table_data,properties);
 }
 

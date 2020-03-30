@@ -27,7 +27,7 @@ The proposed website contains 5 visualizations.
 3. Area chart
 4. Stacked bar chart
 5. Scatter plot
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+![Table](https://github.com/KossaiSbai/sdv-kossai-sbai/blob/master/website_images/sdv_table.png)
 
 ```markdown
 Syntax highlighted code block

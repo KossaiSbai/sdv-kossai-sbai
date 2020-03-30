@@ -22,7 +22,7 @@ function initialise()
     [width,height] = svg_dimensions(svg);
 }
 
-d3.csv("dataset/understat.com.csv", function(d) {
+d3.csv("builds/d3/dataset/understat.com.csv", function(d) {
 return {
         season:+d.year,
         team:d.team,

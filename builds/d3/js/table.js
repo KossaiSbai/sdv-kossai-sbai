@@ -6,7 +6,7 @@ var properties = ['season','team',"position","matches","wins","draws","loses","p
 var columns = ['Season','Team',"Position","Matches","Wins","Draws","Loses","Points","xG","xGA"];
 
 
-d3.csv("dataset/understat.com.csv", function(d) {
+d3.csv("builds/d3/dataset/understat.com.csv", function(d) {
     return {
         league:d.league,
         season:d.year + "/" + (+d.year+1),

@@ -21,9 +21,7 @@ function initialise() {
 }
 
 
-
-
-d3.csv("dataset/understat_per_game.csv", function(d) {
+d3.csv("builds/d3/dataset/understat_per_game.csv", function(d) {
 
     return {
         year:d.year,

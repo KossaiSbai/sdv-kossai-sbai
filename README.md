@@ -81,7 +81,7 @@ The scatter plot highlights the relationship between two pairs of metrics: (xG,g
 
    The visualisation focused essentially on xG and npXG (expected goals related metrics). There are other metrics which can be brought and be combined to give a more accurate estimate of the performance of a team. 
 
-   Furthermore, all the above derived conclusions hold assuming that the xG stats are correct. Nevertheless it is not really crystal clear what model was used to calculate the xG. Hence we do not know how reliable this data is. The following is all what is specified on the website regarding the model: “we trained neural network prediction algorithms with the large dataset (>100,000 shots, over 10 parameters for each).” Cite source [link to understat!](understat.com) 
+   Furthermore, all the above derived conclusions hold assuming that the xG stats are correct. Nevertheless it is not really crystal clear what model was used to calculate the xG. Hence we do not know how reliable this data is. The following is all what is specified on the website regarding the model: “we trained neural network prediction algorithms with the large dataset (>100,000 shots, over 10 parameters for each).” Cite source [understat](understat.com) 
 
 
 ## Conclusions

@@ -25,15 +25,33 @@ The proposed website contains 5 visualizations.
 1. Table
 
 
-![Table](website_images/sdv_table.png). 
+![Table](website_images/sdv_table.png)
+
+
 2. Line chart 
-![Line chart](website_images/Line chart.jpg). 
-3. Area chart 
-![Area chart](website_images/Area chart.png).  
+
+
+![Line chart](website_images/Line chart.jpg)
+
+
+3. Area chart
+
+
+![Area chart](website_images/Area chart.png) 
+
+
 4. Stacked bar chart
-![Stacked bar chart](website_images/Bar chart.png).  
+
+
+![Stacked bar chart](website_images/Bar chart.png)  
+
+
 5. Scatter plot
-![Area chart](website_images/Scatter plot.png).  
+
+
+![Area chart](website_images/Scatter plot.png)  
+
+
 ```markdown
 Syntax highlighted code block
 

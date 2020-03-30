@@ -29,9 +29,9 @@ The proposed website contains 5 visualizations.
 3. Area chart__ 
 ![Area chart](website_images/Area chart.png).  
 4. Stacked bar chart
-
+![Stacked bar chart](website_images/Bar chart.png).  
 5. Scatter plot
-
+![Area chart](website_images/Scatter plot.png).  
 ```markdown
 Syntax highlighted code block
 

@@ -24,7 +24,7 @@ d3.csv("dataset/understat.com.csv", function(d) {
 
 }).then(function (data) {
     include_navbar();
-    navbar("table-item");
+    make_nav_item_active("table-item");
     csv_data = data;
     reset_button();
     all_leagues = extract_all_leagues(data);

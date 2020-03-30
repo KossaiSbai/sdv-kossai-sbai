@@ -20,7 +20,7 @@ Sam Green wrote about the “expected goals” metric (xG) in [2]. In there, usi
 also enables us to defend “key areas of the pitch” and eventually concede less goals. 
 Finally, Rathke Alex in [3], uses an Xg model taking other parameters such as, distance of the shot from the goal,  to investigate about goal scoring in PL and Bundesliga 2012-2013 season, in particular assessing strikers’ performances. He concludes by stressing the reliability of this metric: he states that “could be incorporated into training exercises (attacking and defensive) to aid player’s understanding and needs of the game”.
 
-## Interactive visualizations.
+## Interactive visualizations
 The proposed website contains 5 visualizations. 
 - Table
 
@@ -51,6 +51,28 @@ The proposed website contains 5 visualizations.
 
 ![Area chart](website_images/scatter_plot.png)  
 
+
+
+## Main results
+
+The main results found are the following: 
+-  xG_diff: xG versus goals scored. So if the difference is negative then the team has scored more goals than expected otherwise opposite. 
+“Better teams”, top ranked teams in table tend to have an xg_diff overall negative. 
+Opposite for weaker teams. 
+- xG vs npxG: when observing the value of those two variables for each match of a given season for a given team, average difference of 0.11394721622814627. (size of 23337 entries). Result makes sense since penalties and own goals do not occur that often. Hence, not taking into account those match events does not seem to affect the goal probability a lot. 
+- Scatter plot: Relationship between xG/goals and npxG/xG => moderate positive linear 
+
+## Evaluation
+
+Interesting findings: the following result was expected: the xG gives a pretty accurate prediction of the perofmrnace of a team on a match/season in terms of goals scored and implicitly o=in terms of overall wins/loses. The revealed results confirm this: even if a team might end up scoring more or less than xG, overall xG is fairly close the the number of goals the team scored on the day. The xG seems to reflect well the level difference between teams. 
+Strengths: the visualisations clearly highlight the positive correlation between the metrics and therefore the difference in performance between teams. 
+Limitation of the approach: focused essentially on xG and npXG (expected goals related metrics). There are other metrics which can be brought and be combined to give a more accurate estimate of the performance of a team. 
+We do not really know what model was used to calculate the xG. Hence we do not know how reliable is. 
+
+## Conclusions
+
+What I would do differently: try to use more complex visualisations. On bar chart analyse season by season performance instead of match by match. Might give a different insight since we change the timescale.
+What could be done further: analyse other metrics with number of goals/wins as well as the metrics between themselves. So for example: xG vs deep or xG vs xGa or ppda coefficient vs deep. Essentially bring in more pairs of metrics. 
 
 ```markdown
 Syntax highlighted code block

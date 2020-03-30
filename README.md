@@ -31,25 +31,25 @@ The proposed website contains 5 visualizations.
 - Line chart 
 
 
-![Line chart](website_images/Line chart.jpg)
+![Line chart](website_images/line_chart.jpg)
 
 
 - Area chart
 
 
-![Area chart](website_images/Area chart.png) 
+![Area chart](website_images/area_chart.png) 
 
 
 - Stacked bar chart
 
 
-![Stacked bar chart](website_images/Bar chart.png)  
+![Stacked bar chart](website_images/bar_chart.png)  
 
 
 - Scatter plot
 
 
-![Area chart](website_images/Scatter plot.png)  
+![Area chart](website_images/scatter_plot.png)  
 
 
 ```markdown

@@ -22,11 +22,11 @@ Finally, Rathke Alex in [3], uses an Xg model taking other parameters such as, d
 
 ## Interactive visualizations.
 The proposed website contains 5 visualizations. 
-1. Table. 
+1. Table__ 
 ![Table](website_images/sdv_table.png). 
-2. Line chart. 
+2. Line chart__ 
 ![Line chart](website_images/Line chart.jpg). 
-3. Area chart. 
+3. Area chart__ 
 ![Area chart](website_images/Area chart.png).  
 4. Stacked bar chart
 

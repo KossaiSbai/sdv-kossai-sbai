@@ -193,7 +193,7 @@ function animate_line(path_element, node_length)
 function generate_circles_of_legend(legend_svg,row_interval,entries_per_row,column_interval,team)
 {
     legend_svg.append("circle")
-        .attr("cx",  ((current_teams.length -1) * row_interval) % (entries_per_row*row_interval) + margin.left)
+        .attr("cx",  ((current_teams.length -1) * row_interval) % (entries_per_row*row_interval) + margin.left*1.5 )
         .attr("cy",  Math.floor((current_teams.length-1) / entries_per_row) * column_interval + 10)
         .attr("r",4)// 100 is where the first dot appears. 25 is the distance between dots
         .style("fill",colors[current_teams.length-1])
@@ -214,9 +214,9 @@ function generate_lines_of_legend(legend_svg,row_interval,entries_per_row,column
 {
     legend_svg.append("svg")
         .append("line")
-        .attr("x1",((current_teams.length -1) * row_interval) % (entries_per_row*row_interval) + margin.left - 10)
+        .attr("x1",((current_teams.length -1) * row_interval) % (entries_per_row*row_interval) + margin.left*1.5  - 10)
         .attr("y1",Math.floor((current_teams.length-1) / entries_per_row) * column_interval + 10)
-        .attr("x2",((current_teams.length -1) * row_interval) % (entries_per_row*row_interval) + margin.left + 10)
+        .attr("x2",((current_teams.length -1) * row_interval) % (entries_per_row*row_interval) + margin.left*1.5   + 10)
         .attr("y2",Math.floor((current_teams.length-1) / entries_per_row) * column_interval + 10)
         .attr("stroke",colors[current_teams.length-1])
         .attr("stroke-width",2.5)
@@ -237,7 +237,7 @@ function generate_lines_of_legend(legend_svg,row_interval,entries_per_row,column
 function generate_text_of_legend(legend_svg,row_interval,entries_per_row,column_interval,team)
 {
     legend_svg.append("text")
-        .attr("x", ((current_teams.length -1) * row_interval) % (entries_per_row*row_interval)+ margin.left + 20)
+        .attr("x", ((current_teams.length -1) * row_interval) % (entries_per_row*row_interval)+ margin.left*1.5 + 20)
         .attr("y", Math.floor((current_teams.length-1) / entries_per_row) * column_interval + 12) // 100 is where the first dot appears. 25 is the distance between dots
         .style("fill", colors[current_teams.length-1])
         .text(team)

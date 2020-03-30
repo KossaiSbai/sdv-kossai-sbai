@@ -23,11 +23,14 @@ Finally, Rathke Alex in [3], uses an Xg model taking other parameters such as, d
 ## Interactive visualizations.
 The proposed website contains 5 visualizations. 
 1. Table
-2. Line chart
-3. Area chart
-4. Stacked bar chart
-5. Scatter plot
 ![Table](https://github.com/KossaiSbai/sdv-kossai-sbai/blob/master/website_images/sdv_table.png)
+2. Line chart
+
+3. Area chart
+
+4. Stacked bar chart
+
+5. Scatter plot
 
 ```markdown
 Syntax highlighted code block

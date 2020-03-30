@@ -69,15 +69,29 @@ The scatter plot highlights the relationship between two pairs of metrics: (xG,g
 
 ## Evaluation
 
-Interesting findings: the following result was expected: the xG gives a pretty accurate prediction of the perofmrnace of a team on a match/season in terms of goals scored and implicitly o=in terms of overall wins/loses. The revealed results confirm this: even if a team might end up scoring more or less than xG, overall xG is fairly close the the number of goals the team scored on the day. The xG seems to reflect well the level difference between teams. 
-Strengths: the visualisations clearly highlight the positive correlation between the metrics and therefore the difference in performance between teams. 
-Limitation of the approach: focused essentially on xG and npXG (expected goals related metrics). There are other metrics which can be brought and be combined to give a more accurate estimate of the performance of a team. 
-We do not really know what model was used to calculate the xG. Hence we do not know how reliable is. 
+# Interesting findings 
+
+   The following result was expected: the xG gives a pretty accurate prediction of the performance of a team on a match/season in terms of goals scored and implicitly in terms of overall wins/loses. The revealed results confirm this: even if a team might end up scoring more or less than xG, overall xG is fairly close the the number of goals the team scored on the day. The xG seems to reflect well the level difference between teams. 
+   
+# Strengths 
+
+   The visualisations clearly highlight the positive correlation between the metrics and therefore the difference in performance between teams. Having highlighted both season and match performance gives an interesting insight on how performance can be interpreted over time and enables a more accurate conclusion since we can see different points of view. Finally the dataset used is quite complete (5 seasons 5 leagues), which contributes in the quality of the overall result. 
+
+# Limitations 
+
+   The visualisation focused essentially on xG and npXG (expected goals related metrics). There are other metrics which can be brought and be combined to give a more accurate estimate of the performance of a team. 
+
+   Furthermore, all the above derived conclusions hold assuming that the xG stats are correct. Nevertheless it is not really crystal clear what model was used to calculate the xG. Hence we do not know how reliable this data is. The following is all what is specified on the website regarding the model: “we trained neural network prediction algorithms with the large dataset (>100,000 shots, over 10 parameters for each).” Cite source [link to understat!](understat.com) 
+
 
 ## Conclusions
 
-What I would do differently: try to use more complex visualisations. On bar chart analyse season by season performance instead of match by match. Might give a different insight since we change the timescale.
-What could be done further: analyse other metrics with number of goals/wins as well as the metrics between themselves. So for example: xG vs deep or xG vs xGa or ppda coefficient vs deep. Essentially bring in more pairs of metrics. 
+What could be done differently: 
+Firstly, more complex visualisations could definitely be used. Doing so might be useful to derive even more informed conclusions from the analysis of the data. 
+Secondly on the bar chart,  season by season performance could be analysed instead of match by match. Changing the timescale like that could provide a different point of view on the evolution of a teams performance. 
+
+What could be done further: 
+Additionally to xG and xG-diff other metrics, such as deep or ppda_coef, could be taken into consideration. In fact, the number of goals is not the only factor that can be help assessing a team. Passes quality, possession of the ball and others factors can be useful. So, those could be compared between each other, in order to determine any correlation, as well as with number of goals/wins. Combining those metrics as such can lead to have a more informed estimate and explain past performances.  
 
 ```markdown
 Syntax highlighted code block

@@ -56,11 +56,16 @@ The proposed website contains 5 visualizations.
 ## Main results
 
 The main results found are the following: 
--  xG_diff: xG versus goals scored. So if the difference is negative then the team has scored more goals than expected otherwise opposite. 
-“Better teams”, top ranked teams in table tend to have an xg_diff overall negative. 
-Opposite for weaker teams. 
-- xG vs npxG: when observing the value of those two variables for each match of a given season for a given team, average difference of 0.11394721622814627. (size of 23337 entries). Result makes sense since penalties and own goals do not occur that often. Hence, not taking into account those match events does not seem to affect the goal probability a lot. 
-- Scatter plot: Relationship between xG/goals and npxG/xG => moderate positive linear 
+
+In the area chart, the xG_diff (expected goals difference) is plotted across seasons.  This metric denotes the difference between the predicted number of goals and the actual number of goals scored. Hence mathematically xG_diff = xG - scored. So, if the difference is negative then this means that the team has scored more goals than expected otherwise it is the opposite behaviour.  
+The average xG_diff over the dataset (23337 entries) equals -0.031913455609787665. 
+On the one hand , top ranked teams in table tend to have an overall negative xG_diff value : they overall  score more than expected, which indeed makes sense and is explained by the quality of the team and reflects a good performance from the team. 
+On the other hand, the opposite logic applies to lower ranked teams. 
+
+xG vs npxG: when observing the value of those two variables for each match of a given season for a given team, average difference of 0.11394721622814627.  Result makes sense since penalties and own goals do not occur that often. Hence, not taking into account those match events does not seem to affect the goal probability a lot. 
+
+Scatter plot: this chart highlights the relationship between two pairs of metrics: (xG,goals) and (npxG/xG). After analysis of the obtained results, it can be deduced that the correlation between those variables is moderate positive linear. In fact, as mentioned earlier the npxG barely varies relatively to the xG. Moreover, even if a given team might underperform or overperform in terms of number of goals, the scatter plot shows that the xG predicts pretty accurately: it can be seen by the fact that on each tick of the x axis, the majority of the data points are focused around the equivalent value on the y axis. Above example, for example when we look at the x value of 1, many points have a y value around 1 as well (between 0.5 and 1.5). This indeed concords with the low average xG_diff result mentioned earlier. 
+
 
 ## Evaluation
 

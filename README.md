@@ -20,6 +20,13 @@ Sam Green wrote about the “expected goals” metric (xG) in [2]. In there, usi
 also enables us to defend “key areas of the pitch” and eventually concede less goals. 
 Finally, Rathke Alex in [3], uses an Xg model taking other parameters such as, distance of the shot from the goal,  to investigate about goal scoring in PL and Bundesliga 2012-2013 season, in particular assessing strikers’ performances. He concludes by stressing the reliability of this metric: he states that “could be incorporated into training exercises (attacking and defensive) to aid player’s understanding and needs of the game”.
 
+## Interactive visualizations.
+The proposed website contains 5 visualizations. 
+1. Table
+2. Line chart
+3. Area chart
+4. Stacked bar chart
+5. Scatter plot
 Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
 
 ```markdown

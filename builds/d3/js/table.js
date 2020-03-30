@@ -170,7 +170,7 @@ function load_table(a)
 {
     var enteredValue = $(a).text();
     var table_data = select_league_data(enteredValue,csv_data);
-    update(table_data,properties);
+    update_table(table_data,properties);
 }
 
 /**

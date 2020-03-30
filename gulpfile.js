@@ -4,7 +4,7 @@ webserver = require('gulp-webserver');
 gutil = require('gulp-util');
 
 gulp.task('webserver', function() {
-    gulp.src('index.html')
+    gulp.src('.',{allowEmpty : true})
         .pipe(webserver({
             livereload: true,
             port: 3000,

@@ -66,7 +66,7 @@ headers.append('span')
     .on('click',function () {
         var property = event.target.id.split(" ")[1];
         var sorted_data = sort_data(current_displayed_data,property,asc);
-        update(sorted_data,properties);
+        update_table(sorted_data,properties);
     });
 }
 

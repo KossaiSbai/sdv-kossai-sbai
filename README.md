@@ -26,9 +26,9 @@ The proposed website contains 5 visualizations.
 ` `  
 ` `
 ![Table](website_images/sdv_table.png). 
-2. Line chart__ 
+2. Line chart 
 ![Line chart](website_images/Line chart.jpg). 
-3. Area chart__ 
+3. Area chart 
 ![Area chart](website_images/Area chart.png).  
 4. Stacked bar chart
 ![Stacked bar chart](website_images/Bar chart.png).  

@@ -69,15 +69,15 @@ The scatter plot highlights the relationship between two pairs of metrics: (xG,g
 
 ## Evaluation
 
-# Interesting findings 
+### Interesting findings 
 
    The following result was expected: the xG gives a pretty accurate prediction of the performance of a team on a match/season in terms of goals scored and implicitly in terms of overall wins/loses. The revealed results confirm this: even if a team might end up scoring more or less than xG, overall xG is fairly close the the number of goals the team scored on the day. The xG seems to reflect well the level difference between teams. 
    
-# Strengths 
+### Strengths 
 
    The visualisations clearly highlight the positive correlation between the metrics and therefore the difference in performance between teams. Having highlighted both season and match performance gives an interesting insight on how performance can be interpreted over time and enables a more accurate conclusion since we can see different points of view. Finally the dataset used is quite complete (5 seasons 5 leagues), which contributes in the quality of the overall result. 
 
-# Limitations 
+### Limitations 
 
    The visualisation focused essentially on xG and npXG (expected goals related metrics). There are other metrics which can be brought and be combined to give a more accurate estimate of the performance of a team. 
 

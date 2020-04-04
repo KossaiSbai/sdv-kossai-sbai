@@ -79,10 +79,6 @@ text.axis-ticks{
     color: white;
 }
 
-body
-{
-    background-color: #343636;
-}
 
 .dropdown-menu
 {
@@ -118,5 +114,13 @@ g[id*='axis'] path
 {
     border-radius: 10px 10px 10px 10px;
 }
+
+.btn-github
+{
+    color: #fff;
+    background-color: #444;
+    border-color: rgba(0,0,0,0.2);
+}
+
 
 

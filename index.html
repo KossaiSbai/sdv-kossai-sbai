@@ -1,40 +1,153 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en-US"><head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Visualization</title>
-    <link href="builds/d3/css/bootstrap.min.css" rel="stylesheet">
-    <link href="builds/d3/css/style.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/sdv-kossai-sbai/assets/css/style.css?v=9f6a8b3488abe1517d7bb4ec13e97bf9d1aa3936">
+
+    <!-- Begin Jekyll SEO tag v2.6.1 -->
+    <title>Welcome to GitHub Pages | sdv-kossai-sbai</title>
+    <meta name="generator" content="Jekyll v3.8.5">
+    <meta property="og:title" content="Welcome to GitHub Pages">
+    <meta property="og:locale" content="en_US">
+    <link rel="canonical" href="https://kossaisbai.github.io/sdv-kossai-sbai/">
+    <meta property="og:url" content="https://kossaisbai.github.io/sdv-kossai-sbai/">
+    <meta property="og:site_name" content="sdv-kossai-sbai">
+    <script type="application/ld+json">
+        {"@type":"WebSite","headline":"Welcome to GitHub Pages","url":"https://kossaisbai.github.io/sdv-kossai-sbai/","name":"sdv-kossai-sbai","@context":"https://schema.org"}</script>
+    <!-- End Jekyll SEO tag -->
+
 </head>
-<body style="background-color: #343636">
-<div class=" pb-3 pt-3 text-center">
-    <button type="button" class="btn btn-d dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-        Leagues
-    </button>
-    <div class="dropdown-menu" id="league-dropdown">
+
+<body>
+
+<header>
+    <div class="container">
+        <h1>sdv-kossai-sbai</h1>
+        <h2></h2>
+
+        <section id="downloads">
+
+            <a href="https://github.com/KossaiSbai/sdv-kossai-sbai" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
     </div>
-    <button type="button" id="reset" class="btn btn-d ml-2">
-        Reset
-    </button>
+</header>
 
+<div class="container">
+    <section id="main_content">
+        <h2 id="welcome-to-github-pages">Welcome to GitHub Pages</h2>
+
+        <p>You can use the <a href="https://github.com/KossaiSbai/sdv-kossai-sbai/edit/master/README.md">editor on GitHub</a> to maintain and preview the content for your website in Markdown files.</p>
+
+        <p>Whenever you commit to this repository, GitHub Pages will run <a href="https://jekyllrb.com/">Jekyll</a> to rebuild the pages in your site, from the content in your Markdown files.</p>
+
+        <h2 id="introduction">Introduction</h2>
+        <p>The purpose of this proposal is to provide a data visualisation that will give a better insight on European football, in particular be able to assess teams performances. In fact, football is a low- scoring sport: the overall average number of goals scored per game at the FIFA World Cups between 1930 and 2018, is 3.08. This shows us that we cannot evaluate a teams’ performance on the number of goals scored. It is important to be able to judge how well a team did on given games: it enables the club to improve team strategies and hopefully increase number of won games.
+            Therefore, we can ask ourselves: what are appropriate metrics to use in order to get a reliable measure of the performance of a team? Can analysing the game style of a team help us explain why it might have done better/worse on a given season/game?</p>
+
+        <p>The dataset [1] that will be used, in order to answer those questions contains statistical summary data by the end of each season from 2014 for 6 UEFA Leagues: La Liga, Ligue 1, EPL, Bundesliga, Serie A and RFPL. It is made up of two CSV files: the first one displays summary data per season for all the teams whereas the second one displays similar data per game for all the teams.</p>
+
+        <h2 id="litterature-review">Litterature review</h2>
+        <p>Researchers in the football statistics field have been coming up with different parameters in order to evaluate teams and players performance. For instance, historical-based approaches use past victories, defeats to both assess a team and predict future performance. One drawback of this approach is that teams change over time : incoming and outcoming transfers change the team’s roster and the given club might get different coaches to manage the team, who will most likely adopt different strategies in the games.</p>
+
+        <p>The “expected goals” (xG) metric along with others of them will be used in this visualisation, as as parameters assessing a team’s performance .
+            However what is xG metric?
+            xG tells us how likely it is that a shot would have  resulted in a goal.
+            Sam Green wrote about the “expected goals” metric (xG) in [2]. In there, using OptaPro data collection, he came up with a model that aims to determine “a shot’s probability of being on target and/or scored.” He also states that not only this metric can be useful for offensive perspective but
+            also enables us to defend “key areas of the pitch” and eventually concede less goals.
+            Finally, Rathke Alex in [3], uses an Xg model taking other parameters such as, distance of the shot from the goal,  to investigate about goal scoring in PL and Bundesliga 2012-2013 season, in particular assessing strikers’ performances. He concludes by stressing the reliability of this metric: he states that “could be incorporated into training exercises (attacking and defensive) to aid player’s understanding and needs of the game”.</p>
+
+        <h2 id="interactive-visualizations">Interactive visualizations</h2>
+        <p>The proposed website contains 5 visualizations.</p>
+        <ul>
+            <li>Table</li>
+        </ul>
+
+        <p><img src="/sdv-kossai-sbai/website_images/sdv_table.png" alt="Table"></p>
+
+        <ul>
+            <li>Line chart</li>
+        </ul>
+
+        <p><img src="/sdv-kossai-sbai/website_images/line_chart.jpg" alt="Line chart"></p>
+
+        <ul>
+            <li>Area chart</li>
+        </ul>
+
+        <p><img src="/sdv-kossai-sbai/website_images/area_chart.png" alt="Area chart"></p>
+
+        <ul>
+            <li>Stacked bar chart</li>
+        </ul>
+
+        <p><img src="/sdv-kossai-sbai/website_images/bar_chart.png" alt="Stacked bar chart"></p>
+
+        <ul>
+            <li>Scatter plot</li>
+        </ul>
+
+        <p><img src="/sdv-kossai-sbai/website_images/scatter_plot.png" alt="Area chart"></p>
+
+        <h2 id="main-results">Main results</h2>
+
+        <p>The main results found are the following:</p>
+
+        <p>In the area chart, the xG_diff (expected goals difference) is plotted across seasons.  This metric denotes the difference between the predicted number of goals and the actual number of goals scored. Hence mathematically xG_diff = xG - scored. So, if the difference is negative then this means that the team has scored more goals than expected otherwise it is the opposite behaviour.<br>
+            The average xG_diff over the dataset (23337 entries) equals -0.031913455609787665.
+            On the one hand , top ranked teams in table tend to have an overall negative xG_diff value : they overall  score more than expected, which indeed makes sense and is explained by the quality of the team and reflects a good performance from the team.
+            On the other hand, the opposite logic applies to lower ranked teams.</p>
+
+        <p>xG vs npxG: when observing the value of those two variables for each match of a given season for a given team, average difference of 0.11394721622814627.  Result makes sense since penalties and own goals do not occur that often. Hence, not taking into account those match events does not seem to affect the goal probability a lot.</p>
+
+        <p>The scatter plot highlights the relationship between two pairs of metrics: (xG,goals) and (npxG/xG). After analysis of the obtained results, it can be deduced that the correlation between those variables is moderate positive linear. In fact, as mentioned earlier the npxG barely varies relatively to the xG. Moreover, even if a given team might underperform or overperform in terms of number of goals, the scatter plot shows that the xG predicts pretty accurately: it can be seen by the fact that on each tick of the x-axis, the majority of the data points are focused around the equivalent value on the y-axis. Above example, for example when we look at all data points with an abscissa of 1, many ot those points have an ordinate around 1 as well (between 0.5 and 1.5). This indeed concords with the low average xG_diff result mentioned earlier.</p>
+
+        <h2 id="evaluation">Evaluation</h2>
+
+        <h3 id="interesting-findings">Interesting findings</h3>
+
+        <p>The following result was expected: the xG gives a pretty accurate prediction of the performance of a team on a match/season in terms of goals scored and implicitly in terms of overall wins/loses. The revealed results confirm this: even if a team might end up scoring more or less than xG, overall xG is fairly close the the number of goals the team scored on the day. The xG seems to reflect well the level difference between teams.</p>
+
+        <h3 id="strengths">Strengths</h3>
+
+        <p>The visualisations clearly highlight the positive correlation between the metrics and therefore the difference in performance between teams. Having highlighted both season and match performance gives an interesting insight on how performance can be interpreted over time and enables a more accurate conclusion since we can see different points of view. Finally the dataset used is quite complete (5 seasons 5 leagues), which contributes in the quality of the overall result.</p>
+
+        <h3 id="limitations">Limitations</h3>
+
+        <p>The visualisation focused essentially on xG and npXG (expected goals related metrics). There are other metrics which can be brought and be combined to give a more accurate estimate of the performance of a team.</p>
+
+        <p>Furthermore, all the above derived conclusions hold assuming that the xG stats are correct. Nevertheless it is not really crystal clear what model was used to calculate the xG. Hence we do not know how reliable this data is. The following is all what is specified on the website regarding the model: “we trained neural network prediction algorithms with the large dataset (&gt;100,000 shots, over 10 parameters for each).” Cite source <a href="https://understat.com/">understat</a></p>
+
+        <h2 id="conclusions">Conclusions</h2>
+
+        <p>What could be done differently:
+            Firstly, more complex visualisations could definitely be used. Doing so might be useful to derive even more informed conclusions from the analysis of the data.
+            Secondly on the bar chart,  season by season performance could be analysed instead of match by match. Changing the timescale like that could provide a different point of view on the evolution of a teams performance.</p>
+
+        <p>What could be done further:
+            Additionally to xG and xG-diff other metrics, such as deep or ppda_coef, could be taken into consideration. In fact, the number of goals is not the only factor that can be help assessing a team. Passes quality, possession of the ball and others factors can be useful. So, those could be compared between each other, in order to determine any correlation, as well as with number of goals/wins. Combining those metrics as such can lead to have a more informed estimate and explain past performances.</p>
+
+        <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Syntax highlighted code block
+
+<span class="gh"># Header 1</span>
+<span class="gu">## Header 2</span>
+<span class="gu">### Header 3</span>
+<span class="p">
+-</span> Bulleted
+<span class="p">-</span> List
+<span class="p">
+1.</span> Numbered
+<span class="p">2.</span> List
+
+<span class="gs">**Bold**</span> and _Italic_ and <span class="sb">`Code`</span> text
+
+<span class="p">[</span><span class="nv">Link</span><span class="p">](</span><span class="sx">url</span><span class="p">)</span> and !<span class="p">[</span><span class="nv">Image</span><span class="p">](</span><span class="sx">src</span><span class="p">)</span>
+</code></pre></div></div>
+
+
+    </section>
 </div>
 
-<div class="  p-5 table-responsive-sm " style="background-color: #3E4040">
-    <table class="table table-striped table-dark table-hover table-borderless table-remastered text-center table-fixed" id="ranking_table" style="background-color: #3E4040">
-
-    </table>
-</div>
-
-<script src="builds/d3/js/libraries/jquery.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="builds/d3/js/libraries/bootstrap.min.js"></script>
-<script src="builds/d3/js/libraries/d3.min.js"></script>
-<script src="builds/d3/js/table.js"></script>
-<script src="builds/d3/js/extra.js"></script>
 
 
-</body>
-</html>
+
+</body></html>

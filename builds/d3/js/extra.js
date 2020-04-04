@@ -9,7 +9,7 @@ var navbar_html=
     "<div class=\"collapse navbar-collapse\" id=\"navbarNav\">\n" +
     "<ul class=\"navbar-nav \">\n" +
     "<li class=\"nav-item active\" id='table-item'>\n"  +
-    "<a class=\"nav-link\" href=\"index.html\">Table <span class=\"sr-only\">(current)</span></a>\n" +
+    "<a class=\"nav-link\" href=\"table.html\">Table <span class=\"sr-only\">(current)</span></a>\n" +
     "</li>\n" +
     "<li class=\"nav-item\" id='line-chart-item'>\n" +
     "<a class=\"nav-link\" href=\"line_chart.html\">Line chart</a>\n" +

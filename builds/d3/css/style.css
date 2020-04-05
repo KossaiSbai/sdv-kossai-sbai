@@ -51,6 +51,7 @@ line.axis-ticks
 text.axis-ticks{
     fill: #CDCDCD;
     font-size: 120%;
+    font-family: 'Barlow', Tahoma, serif;
 
 }
 

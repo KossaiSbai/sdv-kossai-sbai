@@ -10,25 +10,22 @@
 <body>
 
 <header>
-    <div class="container">
-        <h1>sdv-kossai-sbai</h1>
-        <h2></h2>
+    <div class="container mb-4">
+        <h1>SDV coursework 2</h1>
+        <h6>Author: Kossaï Sbaï</h6>
+        <h6>Student number: k1746880</h6>
 
         <section id="downloads">
 
-            <a href="https://github.com/KossaiSbai/sdv-kossai-sbai" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
-            <a href="table.html" class=" btn btn-github"> Visualisation <i class="fab fa-github fa-"></i></a>
+            <a href="https://github.com/KossaiSbai/sdv-kossai-sbai" class="btn btn-github"> Repository <i class="fab fa-github "></i></a>
+            <a href="table.html" class=" btn shadow btn-github"> Visualisation <i class="fas fa-chart-bar"></i></a>
         </section>
     </div>
 </header>
 
 <div class="container">
     <section id="main_content">
-        <h2 id="welcome-to-github-pages">Welcome to GitHub Pages</h2>
 
-        <p>You can use the <a href="https://github.com/KossaiSbai/sdv-kossai-sbai/edit/master/README.md">editor on GitHub</a> to maintain and preview the content for your website in Markdown files.</p>
-
-        <p>Whenever you commit to this repository, GitHub Pages will run <a href="https://jekyllrb.com/">Jekyll</a> to rebuild the pages in your site, from the content in your Markdown files.</p>
 
         <h2 id="introduction">Introduction</h2>
         <p>The purpose of this proposal is to provide a data visualisation that will give a better insight on European football, in particular be able to assess teams performances. In fact, football is a low- scoring sport: the overall average number of goals scored per game at the FIFA World Cups between 1930 and 2018, is 3.08. This shows us that we cannot evaluate a teams’ performance on the number of goals scored. It is important to be able to judge how well a team did on given games: it enables the club to improve team strategies and hopefully increase number of won games.
@@ -36,102 +33,100 @@
 
         <p>The dataset [1] that will be used, in order to answer those questions contains statistical summary data by the end of each season from 2014 for 6 UEFA Leagues: La Liga, Ligue 1, EPL, Bundesliga, Serie A and RFPL. It is made up of two CSV files: the first one displays summary data per season for all the teams whereas the second one displays similar data per game for all the teams.</p>
 
-        <h2 id="litterature-review">Litterature review</h2>
-        <p>Researchers in the football statistics field have been coming up with different parameters in order to evaluate teams and players performance. For instance, historical-based approaches use past victories, defeats to both assess a team and predict future performance. One drawback of this approach is that teams change over time : incoming and outcoming transfers change the team’s roster and the given club might get different coaches to manage the team, who will most likely adopt different strategies in the games.</p>
-
-        <p>The “expected goals” (xG) metric along with others of them will be used in this visualisation, as as parameters assessing a team’s performance .
-            However what is xG metric?
-            xG tells us how likely it is that a shot would have  resulted in a goal.
-            Sam Green wrote about the “expected goals” metric (xG) in [2]. In there, using OptaPro data collection, he came up with a model that aims to determine “a shot’s probability of being on target and/or scored.” He also states that not only this metric can be useful for offensive perspective but
-            also enables us to defend “key areas of the pitch” and eventually concede less goals.
-            Finally, Rathke Alex in [3], uses an Xg model taking other parameters such as, distance of the shot from the goal,  to investigate about goal scoring in PL and Bundesliga 2012-2013 season, in particular assessing strikers’ performances. He concludes by stressing the reliability of this metric: he states that “could be incorporated into training exercises (attacking and defensive) to aid player’s understanding and needs of the game”.</p>
-
         <h2 id="interactive-visualizations">Interactive visualizations</h2>
         <p>The proposed website contains 5 visualizations.</p>
-        <ul>
-            <li>Table</li>
-        </ul>
+        <h5>Table</h5>
+        <p>The table shows various statistics for all the teams of a given league.
+            The user can choose which league to be displayed.
+            The user can also sort the rows, by any column, in both ascending and descending order.</p>
+        <p><img src="/sdv-kossai-sbai/website_images/sdv_table.png" alt="Table" class="img-fluid mb-5"></p>
 
-        <p><img src="/sdv-kossai-sbai/website_images/sdv_table.png" alt="Table"></p>
+        <h5>Line chart</h5>
 
-        <ul>
-            <li>Line chart</li>
-        </ul>
+        <p>The line chart plots the number of victories of chosen teams across seasons. The user can select up to 12 teams to be plotted on the chart.</p>
+        <p><img src="/sdv-kossai-sbai/website_images/line_chart.jpg" class="img-fluid mb-5" alt="Line chart"></p>
 
-        <p><img src="/sdv-kossai-sbai/website_images/line_chart.jpg" alt="Line chart"></p>
+        <h5>Area chart</h5>
 
-        <ul>
-            <li>Area chart</li>
-        </ul>
+        <p> The area chart shows the xG_diff (expected goals difference), for a given team, across seasons.  This metric denotes the difference between the predicted number of goals and the actual number of goals scored. Hence mathematically xG_diff = xG - scored. So, if the difference is negative then this means that the team has scored more goals than expected otherwise it is the opposite behaviour.</p>
+        <p><img src="/sdv-kossai-sbai/website_images/area_chart.png" class="img-fluid mb-5" alt="Area chart"></p>
 
-        <p><img src="/sdv-kossai-sbai/website_images/area_chart.png" alt="Area chart"></p>
+        <h5>Stacked bar chart</h5>
 
-        <ul>
-            <li>Stacked bar chart</li>
-        </ul>
+        <p> The stacked bar chart plots the xG, npxG and number of goals values for a given team and for each match of a given season.
+            The npxG predicts the number of goals without penalties and own goals.
+            The user can choose the team and the season to be plotted. </p>
+        <p><img src="/sdv-kossai-sbai/website_images/bar_chart.png" class="img-fluid mb-5" alt="Stacked bar chart"></p>
 
-        <p><img src="/sdv-kossai-sbai/website_images/bar_chart.png" alt="Stacked bar chart"></p>
+        <h5>Scatter plot</h5>
 
-        <ul>
-            <li>Scatter plot</li>
-        </ul>
-
-        <p><img src="/sdv-kossai-sbai/website_images/scatter_plot.png" alt="Area chart"></p>
+        <p>The scatter plot, represents the correlation between (xG,npxG) and (xG,number of goals), for a given team across all seasons.
+        The user can choose the team to be plotted.</p>
+        <p><img src="/sdv-kossai-sbai/website_images/scatter_plot.png" class="img-fluid mb-5" alt="Area chart"></p>
 
         <h2 id="main-results">Main results</h2>
 
         <p>The main results found are the following:</p>
 
-        <p>In the area chart, the xG_diff (expected goals difference) is plotted across seasons.  This metric denotes the difference between the predicted number of goals and the actual number of goals scored. Hence mathematically xG_diff = xG - scored. So, if the difference is negative then this means that the team has scored more goals than expected otherwise it is the opposite behaviour.<br>
-            The average xG_diff over the dataset (23337 entries) equals -0.031913455609787665.
-            On the one hand , top ranked teams in table tend to have an overall negative xG_diff value : they overall  score more than expected, which indeed makes sense and is explained by the quality of the team and reflects a good performance from the team.
-            On the other hand, the opposite logic applies to lower ranked teams.</p>
+        <p>
+            The average xG_diff over the dataset (23337 entries) approximately equals -0.03.
+            On the one hand, stronger (top ranked) teams tend to have an overall negative xG_diff value : they score more than expected, which indeed makes sense and is explained by the quality of the team. This reflects a good performance from the team.
+            On the other hand, the opposite logic applies to weaker teams (low ranked).</p>
 
-        <p>xG vs npxG: when observing the value of those two variables for each match of a given season for a given team, average difference of 0.11394721622814627.  Result makes sense since penalties and own goals do not occur that often. Hence, not taking into account those match events does not seem to affect the goal probability a lot.</p>
+        <p>On the bar chart, when observing the value of xG and npxG for each match of a given season for a given team, the average difference equals approximately 0.11. This statistic makes sense since penalties and own goals remain rare in professional football. Hence, not taking into account those match events does not seem to affect much the goal probability </p>
 
-        <p>The scatter plot highlights the relationship between two pairs of metrics: (xG,goals) and (npxG/xG). After analysis of the obtained results, it can be deduced that the correlation between those variables is moderate positive linear. In fact, as mentioned earlier the npxG barely varies relatively to the xG. Moreover, even if a given team might underperform or overperform in terms of number of goals, the scatter plot shows that the xG predicts pretty accurately: it can be seen by the fact that on each tick of the x-axis, the majority of the data points are focused around the equivalent value on the y-axis. Above example, for example when we look at all data points with an abscissa of 1, many ot those points have an ordinate around 1 as well (between 0.5 and 1.5). This indeed concords with the low average xG_diff result mentioned earlier.</p>
+        <p>After analysis of the obtained results via the scatter plot, it can be deduced that the correlation between the observed variables (xG, npxG, goals) is moderate positive linear. In fact, on the one hand, as observed on the bar chart, the npxG barely varies relatively to the xG, which confirms the average low difference mentioned earlier. On the other hand, even if a given team might underperform or overperform in terms of number of goals, the scatter plot shows that the xG predicts pretty accurately the actual number of scored goals: this can be shown by the fact that on each tick of the x-axis, the majority of the data points are focused around the equivalent value on the y-axis. For instance in the above example (image), when we look at all data points with an abscissa of 1, many ot those points have an ordinate around 1 as well (between 0.5 and 1.5). This indeed concords with the low average xG_diff result mentioned earlier.</p>
 
-        <h2 id="evaluation">Evaluation</h2>
+        <h2 id="evaluation" class="mb-3">Evaluation</h2>
 
-        <h3 id="interesting-findings">Interesting findings</h3>
+        <h5 id="interesting-findings">Interesting findings</h5>
 
-        <p>The following result was expected: the xG gives a pretty accurate prediction of the performance of a team on a match/season in terms of goals scored and implicitly in terms of overall wins/loses. The revealed results confirm this: even if a team might end up scoring more or less than xG, overall xG is fairly close the the number of goals the team scored on the day. The xG seems to reflect well the level difference between teams.</p>
+        <p>The following interrogation was being explored through this visualisation: is the xG a good metric to forecast the number of goals scored by a given team and more generally its overall performance?
+            The answer to this question seems to be yes. The revealed results confirm this: even if a team might end up scoring more or less than xG, overall xG is fairly close the the number of goals the team scored on the day. The xG seems to reflect well the level difference between teams.</p>
 
-        <h3 id="strengths">Strengths</h3>
+        <h5 id="strengths">Strengths</h5>
 
-        <p>The visualisations clearly highlight the positive correlation between the metrics and therefore the difference in performance between teams. Having highlighted both season and match performance gives an interesting insight on how performance can be interpreted over time and enables a more accurate conclusion since we can see different points of view. Finally the dataset used is quite complete (5 seasons 5 leagues), which contributes in the quality of the overall result.</p>
+        <p>The visualisations clearly highlight the positive correlation between the metrics and therefore the difference in performance between teams. Having highlighted both season and match performance gives an interesting insight on how performance can be interpreted over time and enables a more accurate conclusion since we can see different points of view. The latter is also enhanced by the use of varied types of visualisations (stacked bar, line, area charts, table and scatter plot). Finally the dataset used is quite complete (5 seasons and 6 leagues), which contributes in the quality of the overall result.</p>
 
-        <h3 id="limitations">Limitations</h3>
+      <h5 id="limitations">Limitations</h5>
 
         <p>The visualisation focused essentially on xG and npXG (expected goals related metrics). There are other metrics which can be brought and be combined to give a more accurate estimate of the performance of a team.</p>
 
-        <p>Furthermore, all the above derived conclusions hold assuming that the xG stats are correct. Nevertheless it is not really crystal clear what model was used to calculate the xG. Hence we do not know how reliable this data is. The following is all what is specified on the website regarding the model: “we trained neural network prediction algorithms with the large dataset (&gt;100,000 shots, over 10 parameters for each).” Cite source <a href="https://understat.com/">understat</a></p>
+        <p>Furthermore, all the above derived conclusions hold assuming that the xG stats are correct. Nevertheless it is not really crystal clear what model was used to calculate the xG. Hence we do not know how reliable this data is. The following is all what is specified on the website regarding the model: “we trained neural network prediction algorithms with the large dataset (&gt;100,000 shots, over 10 parameters for each).” [4]
 
         <h2 id="conclusions">Conclusions</h2>
-
-        <p>What could be done differently:
+        <h5>What could be done differently:</h5>
+        <p>
             Firstly, more complex visualisations could definitely be used. Doing so might be useful to derive even more informed conclusions from the analysis of the data.
             Secondly on the bar chart,  season by season performance could be analysed instead of match by match. Changing the timescale like that could provide a different point of view on the evolution of a teams performance.</p>
 
-        <p>What could be done further:
-            Additionally to xG and xG-diff other metrics, such as deep or ppda_coef, could be taken into consideration. In fact, the number of goals is not the only factor that can be help assessing a team. Passes quality, possession of the ball and others factors can be useful. So, those could be compared between each other, in order to determine any correlation, as well as with number of goals/wins. Combining those metrics as such can lead to have a more informed estimate and explain past performances.</p>
+        <h5>What could be done further:</h5>
+        <p>
+            Additionally to xG and xG-diff, other metrics, such as deep or ppda_coef, could be taken into consideration. In fact, the number of goals is not the only factor that can be help assessing a team. Passes quality (e.g. accuracy), possession of the ball and others factors can be useful. So, those could be compared between each other, in order to determine any correlation, as well as with number of goals/wins across time. Combining those metrics as such can lead to have a more informed estimate and explain past performances and hence get a better understanding of European football.</p>
 
-        <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Syntax highlighted code block
+        <h2 id="literature-references"> Literature references </h2>
+        <p>
+        [1], [2] and [3] were used in the literature review for coursework 1. [1] is the dataset used for this project.
+        </p>
+            <p>
+        [4], additionally to being the source of the data of the dataset in [1], was mainly used as inspiration for the idea behind the project and gave me design ideas for the website (colors).
+        </p>
+        <p>
+        [5], [6] and [7] were used in my code to respectively implement the line chart animation, scatter plot animation and the update process for the stacked bar chart.
+        </p>
+        <p>
+        [1] Lehkyi, Sergi. “Football Data: Expected Goals and Other Metrics.” Kaggle, 20 Feb. 2020, <a href="https://www.kaggle.com/slehkyi/extended-football-stats-for-european-leagues-xg">www.kaggle.com/slehkyi/extended-football-stats-for-european-leagues-xg.</a>       </p>
+        <p>  [2] Green, Sam. “Assessing the Performance of Premier League Goalscorers.” OptaPro, 12 Apr. 2012, <a href="https://www.optasportspro.com/news-analysis/assessing-the-performance-of-premier-league-goalscorers/">www.optasportspro.com/news-analysis/assessing-the-performance-of-premier-league-goalscorers/.</a></p>
 
-<span class="gh"># Header 1</span>
-<span class="gu">## Header 2</span>
-<span class="gu">### Header 3</span>
-<span class="p">
--</span> Bulleted
-<span class="p">-</span> List
-<span class="p">
-1.</span> Numbered
-<span class="p">2.</span> List
+        <p>[3] Alex Rathke. “An examination of expected goals and shot efficiency in soccer”. In: Journal of Human Sport and Exercise 12.Proc2  (Mar.  2017). DOI: 10.14198/jhse.2017.12.proc2.05. </p>
 
-<span class="gs">**Bold**</span> and _Italic_ and <span class="sb">`Code`</span> text
+        <p>[4] xG stats for teams and players from the TOP European leagues. <a href="https://understat.com/.">https://understat.com/.</a></p>
 
-<span class="p">[</span><span class="nv">Link</span><span class="p">](</span><span class="sx">url</span><span class="p">)</span> and !<span class="p">[</span><span class="nv">Image</span><span class="p">](</span><span class="sx">src</span><span class="p">)</span>
-</code></pre></div></div>
+        <p>[5] Louise Moxy.Create a D3 line chart animation. Oct. 2018.url:<a href="https://medium.com/@louisemoxy/create-a-d3-line-chart-animation-336f1cb7dd61">https://medium.com/@louisemoxy/create-a-d3-line-chart-animation-336f1cb7dd61.</a></p>
+
+        <p>[6] Yan Holtz.Scatterplot with animation at loading in d3.js.url:<a href="https://www.d3-graph-gallery.com/graph/scatter_animation_start.html">https://www.d3-graph-gallery.com/graph/scatter_animation_start.html</a></p>
+
+        <p>[7] Stacked Bar Update Pattern.url:<a href="https://bl.ocks.org/HarryStevens/7e3ec1a6722a153a5d102b6c42f4501d">https://bl.ocks.org/HarryStevens/7e3ec1a6722a153a5d102b6c42f4501d</a></p>
 
 
     </section>

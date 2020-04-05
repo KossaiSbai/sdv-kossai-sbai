@@ -21,7 +21,6 @@ span
 .axis-label,.chart-title
 {
     fill: #CDCDCD;
-    font-family: 'Barlow', Tahoma,serif;
     font-size: 100%;
     
 }
@@ -51,7 +50,6 @@ line.axis-ticks
 
 text.axis-ticks{
     fill: #CDCDCD;
-    font-family: 'Barlow', Tahoma,serif;
     font-size: 120%;
 
 }
@@ -122,5 +120,14 @@ g[id*='axis'] path
     border-color: rgba(0,0,0,0.2);
 }
 
+body
+{
+    font-family: 'Barlow', Tahoma, serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: white;
+    background-color: #272729
+}
 
 

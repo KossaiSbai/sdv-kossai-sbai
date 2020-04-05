@@ -83,7 +83,6 @@ text.axis-ticks{
 {
     overflow-y: auto;
     max-height: 300px;
-    border-top-right-radius: 0;
 }
 
 

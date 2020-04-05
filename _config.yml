@@ -1,7 +1,0 @@
-theme: jekyll-theme-hacker
-defaults:
-  - 
-    scope:
-      path: "index.md"
-    values:
-      permalink: "index.html"

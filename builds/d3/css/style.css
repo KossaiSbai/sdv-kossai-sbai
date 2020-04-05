@@ -81,9 +81,13 @@ text.axis-ticks{
 
 .dropdown-menu
 {
-    overflow-y: auto;
-    max-height: 100px;
+    overflow-y:scroll;
+    max-height: 300px;
+    border-top-right-radius: 0;
 }
+
+
+
 
 g[id*='axis'] path
 {
@@ -129,6 +133,11 @@ body
     line-height: 1.5;
     color: white;
     background-color: #272729
+}
+
+a
+{
+    cursor: pointer;
 }
 
 

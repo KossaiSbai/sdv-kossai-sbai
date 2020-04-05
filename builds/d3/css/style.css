@@ -81,6 +81,7 @@ text.axis-ticks{
 
 .dropdown-menu
 {
+    overflow-y: auto;
     max-height: 300px;
     border-top-right-radius: 0;
 }

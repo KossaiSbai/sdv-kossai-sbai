@@ -7,7 +7,7 @@ var max_victories,xScale,yScale,allTeams = null;
 var displayed_data = [];
 var csv_data = [];
 var current_teams = [];
-
+var teams_limit = 12;
 
 /**
  * Initialises svg containers as well as other components such as the navbar.
@@ -450,8 +450,11 @@ function update_line_chart() {
  */
 function add_team_line(a) {
     var enteredValue = $(a).text();
+    console.log(current_teams);
+    console.log(current_teams.length);
     if (!allTeams.includes(enteredValue)) alert("This team is not valid");
     else if(current_teams.includes(enteredValue)) alert("This team is already on the plot");
+    else if(current_teams.length===teams_limit) alert("You can only plot up to 12 teams on the chart");
     else {
         var team_data = csv_data.filter(d => d.team.localeCompare(enteredValue) === 0);
         plot_line_chart(team_data, colors[current_teams.length], margin, xScale, yScale);

@@ -18,10 +18,10 @@ var navbar_html=
     "<a class=\"nav-link\" href=\"area_chart.html\">Area chart</a>\n" +
     "</li>\n" +
     "<li class=\"nav-item\" id='bar-chart-item'>\n" +
-    "<a class=\"nav-link\" href=\"bar_chart.html\">Bar chart</a>\n" +
+    "<a class=\"nav-link\" href=\"bar_chart.html\">Stacked bar chart</a>\n" +
     "</li>\n" +
     "<li class=\"nav-item\" id='scatterplot-chart-item'>\n" +
-    "<a class=\"nav-link\" href=\"scatterplot.html\">Scatterplot chart</a>\n" +
+    "<a class=\"nav-link\" href=\"scatterplot.html\">Scatter plot</a>\n" +
     "</li>\n" +
     "</ul>\n" +
     "</div>\n" +
